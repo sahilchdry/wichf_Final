@@ -12,24 +12,20 @@
  <div class="container"> 
  <div class="main_content">
         <center><h2>Featured services</h2></center>
-        <div class="lorem lorem1">
-          <h3>Swapnil Warke</h3>
-          <img src="images/loram_img1.jpg" width="66" height="54" alt="img" align="left" />
-          <p></p>
-        </div>
+        
         <div class="lorem">
-          <h3>Pratik Bidkar</h3>
+          <h3>Swapnil</h3>
           <img src="images/loram_img2.jpg" width="66" height="54" alt="img" align="left" />
           <p></p>
         </div>
         <div class="lorem">
-          <h3>Ankita Mishra</h3>
-          <img src="images/loram_img3.jpg" width="66" height="54" alt="img" align="left" />
+          <h3>Pratik Bidkar</h3>
+          <img src="images/pratik.jpg" width="66" height="54" alt="img" align="left" />
           <p></p>
         </div>
         <div class="lorem">
-          <h3>Sahil Chaudary</h3>
-          <img src="images/loram_img4.jpg" width="66" height="54" alt="img" align="left" />
+          <h3>Ankita Mishra</h3>
+          <img src="images/ankita.jpg" width="66" height="54" alt="img" align="left" />
           <p> </p>
         </div>
         

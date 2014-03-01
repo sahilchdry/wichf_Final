@@ -4,7 +4,7 @@
 <%@ include file="header.jsp" %>
 <html>
 <head>
-<title>Choose Schedule</title>
+<title>Minimum Required Code - Epoch DHTML Javascript Calendar</title>
 
 <style rel="stylesheet" type="text/css">
 table.calendar {
@@ -970,13 +970,15 @@ Array.prototype.arrayIndex = function(searchVal,startIndex) //similar to array.i
 /*You can also place this code in a separate file and link to it like epoch_classes.js*/
   var bas_cal,dp_cal,ms_cal;      
 window.onload = function () {
-  bas_cal = new Epoch('epoch_basic','flat',document.getElementById('basic_container'));
+  dp_cal  = new Epoch('epoch_popup','popup',document.getElementById('popup_container'));
 };
 </script>
 </head>
 <body>
-<center><h2>Choose schedule</h2></center>
-<div id="basic_container"></div>
+<h2>Popup</h2>
+<form id="placeholder" method="get" action="#">
+  <input id="popup_container" type="text" />
+</form>
 
 </body>
 
