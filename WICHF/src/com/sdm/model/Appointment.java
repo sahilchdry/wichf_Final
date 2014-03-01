@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -25,37 +24,37 @@ public class Appointment {
 	@Column(name="booked_through")
 	private String bookedThrough;
 	
-	@Column(name="visit_type_id")
-	private int visitTypeId;
-	
 	@Column(name="active")
 	private Boolean active;
-	
-	@Column(name="booked_date")
-	private Date bookedDate;
 	
 	@Column(name="appointment_date")
 	private Date appointmentDate;
 	
-	public Date getAppointmentDate() {
-		return appointmentDate;
-	}
-
-	public void setAppointmentDate(Date appointmentDate) {
-		this.appointmentDate = appointmentDate;
-	}
-
-	@ManyToOne(targetEntity = Doctor.class, cascade = CascadeType.ALL)
+	@Column(name="booked_date")
+	private Date bookedDate;
+	
+	@ManyToOne(targetEntity = Doctor.class)
 	@JoinColumn(name="doctor_id", referencedColumnName="doctor_id")
 	private Doctor doctor;
 	
-	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name="user_id", referencedColumnName="user_id")
 	private User user;
 	
-//	@ManyToOne(targetEntity = Room.class)
-//	@JoinColumn(name="room_id")
-	private int roomId;
+	@ManyToOne(targetEntity = Room.class)
+	@JoinColumn(name="room_id", referencedColumnName="room_id" )
+	private Room room;
+	
+	@ManyToOne(targetEntity = Appointment.class)
+	@JoinColumn(name="parent_appointment_id", referencedColumnName="appointment_id")
+	private Appointment parentAppointmentId;
+	
+	@Column(name="start_time")
+	private Date startTime;
+	
+	@ManyToOne(targetEntity = VisitType.class)
+    @JoinColumn(name="visit_type_id", referencedColumnName="visit_type_id")
+	private int visitTypeId;
 
 	public int getAppointmentId() {
 		return appointmentId;
@@ -71,6 +70,14 @@ public class Appointment {
 
 	public void setTimeSlot(int timeSlot) {
 		this.timeSlot = timeSlot;
+	}
+
+	public Date getAppointmentDate() {
+		return appointmentDate;
+	}
+
+	public void setAppointmentDate(Date appointmentDate) {
+		this.appointmentDate = appointmentDate;
 	}
 
 	public String getBookedThrough() {
@@ -106,13 +113,6 @@ public class Appointment {
 	}
 
 
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
-	}
-
-	public int getRoomId() {
-		return roomId;
-	}
 
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
@@ -128,6 +128,30 @@ public class Appointment {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Appointment getParentAppointmentId() {
+		return parentAppointmentId;
+	}
+
+	public void setParentAppointmentId(Appointment parentAppointmentId) {
+		this.parentAppointmentId = parentAppointmentId;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 	
 	

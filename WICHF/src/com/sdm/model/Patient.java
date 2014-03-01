@@ -2,6 +2,7 @@ package com.sdm.model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,8 +39,8 @@ public class Patient {
 	private boolean isAnnualCheckUpDone;
 	
 	
-	@OneToOne
-    @JoinColumn(name="user_id")
+	@OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id", referencedColumnName="user_id")
 	private User user;
 
 

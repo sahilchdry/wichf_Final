@@ -36,7 +36,7 @@ public class AppointmentAction extends ActionSupport
 	 public String makeAppointment()
 	   {
 		 System.out.println("*********");
-		 appointment.setAppointmentId(id());
+		 appointment.setAppointmentId(0);
 		 appointment.setActive(true);
 		 appointment.setBookedDate(null);
 		 appointment.setAppointmentDate(null);

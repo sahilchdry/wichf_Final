@@ -30,8 +30,8 @@ public class PatientAction extends ActionSupport implements ModelDriven<Patient>
 		
 		patient.getUser().setAccessLevel("patient");
 		userDAO.addUser(patient.getUser());
-		patientDAO.addPatient(patient);
-		
+		patient = patientDAO.addPatient(patient);
+		System.out.println("Patient is saved with id:"+patient.getPatientId());
 		return "success";
 	}
 
