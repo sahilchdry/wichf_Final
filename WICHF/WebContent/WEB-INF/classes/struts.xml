@@ -38,6 +38,11 @@
          <result name="success"> /appointment.jsp </result>
       </action>
       
+      <action name="login" method="login"
+         class="com.sdm.controller.UserAction">
+         <result name="success">/home.jsp </result>
+      </action>
+      
       <action name="">
 		 
 		  <result>/appointment.jsp</result>

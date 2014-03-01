@@ -10,12 +10,12 @@
 <body>
 
 <br><center><h3>Login</h3></center>
-<FORM>
+<FORM action="login" method="post">
 <TABLE align="center" >
   <TR>
     <TD>User Name</TD>
     <TD>
-      <INPUT TYPE="TEXT" NAME="username" SIZE="20">
+      <INPUT TYPE="TEXT" NAME="userId" SIZE="20">
     </TD>
   </TR>
   <TR>

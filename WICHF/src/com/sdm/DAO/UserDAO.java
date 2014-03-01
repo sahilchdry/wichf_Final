@@ -25,6 +25,7 @@ public class UserDAO {
 		   {
 		      List<User> users = new ArrayList<User>();
 		      session = HibernateUtil.getSessionFactory().getCurrentSession();
+		      transaction = session.beginTransaction();
 		      try
 		      {
 		         users = session.createQuery("from User").list();
@@ -33,24 +34,31 @@ public class UserDAO {
 		      {
 		         e.printStackTrace();
 		      }
+		      transaction.commit();
 		      return users;
 		   }
 		
 		public User getUserById(String userId)	
 		   {
+			System.out.println(userId);
 		      User user=null;
-		      session = HibernateUtil.getSessionFactory().getCurrentSession();
-		      String hql = "FROM USER WHERE USER_ID= :userId";
-		      try
-		      {
-		         Query query = session.createQuery(hql);
-		         query.setParameter("userId", userId);
-		         user = (query.list() != null)? (User)query.list().get(0):null;
-		      }
-		      catch(Exception e)
-		      {
-		         e.printStackTrace();
-		      }
+		      session = HibernateUtil.getSessionFactory().openSession();
+	          user =  (User) session.get(User.class, userId);
+		     // String hql = "FROM USER WHERE USER_ID= :userId";
+		    // user = (User)session.get( User.class, userId );
+//		      try
+//		      {
+//		         Query query = session.createQuery(hql);
+//		         query.setParameter("userId", userId);
+//		         System.out.println(query);
+//		         user = (query.list() != null)? (User)query.list().get(0):null;
+//		      }
+//		      catch(Exception e)
+//		      {
+//		         e.printStackTrace();
+//		      }
+	          //System.out.println(user.get);
+		     // transaction.commit();
 		      return user;
 		   }
 		

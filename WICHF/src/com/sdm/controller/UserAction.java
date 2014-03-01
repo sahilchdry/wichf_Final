@@ -38,6 +38,14 @@ public class UserAction extends ActionSupport
 	      return "success";
 	   }
 
+	 public String login(){
+		 String result = "failure";
+		 User loggedUser = userDAO.getUserById(user.getUserId());
+		 if(loggedUser.getPassword().equals(user.getPassword())){
+			 result="success";
+		 }
+		 return result;
+	 }
 	   public String listUsers()
 	   {
 	      users = userDAO.getUsers();
