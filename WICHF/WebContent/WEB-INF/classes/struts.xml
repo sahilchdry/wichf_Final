@@ -36,6 +36,18 @@
       <action name="appointment" method="makeAppointment"
          class="com.sdm.controller.AppointmentAction">
          <result name="success"> /appointment.jsp </result>
+<!--          <result name="displayAppointments">/userAppointments.jsp</result> -->
+      </action>
+      
+      <action name="getAppointments" method="getAppointmentsForUser"
+         class="com.sdm.controller.AppointmentAction">
+         <result name="displayAppointments">/userAppointments.jsp</result>
+      </action>
+      
+      
+      <action name="login" method="login"
+         class="com.sdm.controller.UserAction">
+         <result name="success">/home.jsp </result>
       </action>
       
       <action name="login" method="login"
