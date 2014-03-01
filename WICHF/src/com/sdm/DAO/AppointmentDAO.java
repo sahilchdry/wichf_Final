@@ -4,18 +4,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
 
 import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
 import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
 import com.sdm.model.Appointment;
-import com.sdm.model.Doctor;
-import com.sdm.model.Nurse;
 import com.sdm.model.User;
 import com.sdm.util.HibernateUtil;
 
@@ -79,14 +74,18 @@ public class AppointmentDAO {
 //			DetachedCriteria c = DetachedCriteria.forClass(Appointment.class);
 //			c.add(Restrictions.eq(String.valueOf(appointment.getDoctor().getDoctorId()), 45));
 //			c.getExecutableCriteria(session).;
-			 System.out.println("Appointment Room Id:"+appointment.getRoom().getRoomId());
-			session.save(appointment);
-			transaction.commit();
+			// System.out.println("Appointment Room Id:"+appointment.getRoom().getRoomId());
+			 try{
+				session.save(appointment);
+				transaction.commit();
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
 			return appointment;
 		   }
 		
 		public int cancelAppointment(int appointmentId)
-		   {
+		   {	
 			initializeTransaction();
 			String hql;
 			int result =0;
@@ -146,21 +145,23 @@ public class AppointmentDAO {
 			session.save(appointment);
 			return appointment;
 		   }
-		@SuppressWarnings({ "rawtypes", "unchecked" })
+		
 		public List<Appointment> getAppointments(User user) {
 			//List obj
 			//Get all active appointments
-			List<Appointment> appointmentList = new ArrayList();
-			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			List<Appointment> appointmentList = new ArrayList<Appointment>();
+			initializeTransaction();
 			String hql;
-			hql = "FROM APPOINTMENT WHERE ACTIVE = :active and user_id = :userId";
+			hql = "FROM Appointment WHERE active = :active and user_id = :userId";
 			try
 			{
 				Query query = session.createQuery(hql);
-				query.setParameter(":active", true);
-		    	  query.setParameter(":userId", user.getUserId());
+				query.setParameter("active", true);
+		    	  query.setParameter("userId", user.getUserId());
 		    	  appointmentList = (query.list()!=null)?(List<Appointment>) query.list() :null;
-				
+		    	  
+		    	  //appointmentList = (List<Appointment>) session.createQuery("from Appointment where user_id =").setParameter("", arg1)
+		    	  transaction.commit();
 			}
 			catch(Exception e)
 			{
@@ -169,6 +170,7 @@ public class AppointmentDAO {
 			return appointmentList;
 		}
 		
+	
 		
 		
 }

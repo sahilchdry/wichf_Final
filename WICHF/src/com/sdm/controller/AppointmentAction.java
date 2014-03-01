@@ -44,31 +44,38 @@ public class AppointmentAction extends ActionSupport
 		 appointment.setActive(true);
 		 appointment.setBookedDate(null);
 		 appointment.setAppointmentDate(null);
-		 appointment.setBookedThrough("User Id");
+		 appointment.setBookedThrough("Nurse");
 		 doctor.setDoctorId(1);
 		 appointment.setDoctor(doctor);
 		
 		 System.out.println(doctor.getDoctorId());
-		 room.setRoomId(1);
-		 room.setRoomNumber(101);
+		 room.setRoomId(2);
+		 
 		 //room = roomDAO.getRoomById(1);
 		 appointment.setRoom(room); 
 		
 		 appointment.setTimeSlot(20);
 		 visitType.setVisitTypeId(1);
 		 appointment.setVisitType(visitType); //need to put visit type id object
-		 user.setUserId("sahil");
+		 user.setUserId("asdasdf");
 		 appointment.setUser(user);
-		 
+		 appointment.setParentAppointmentId(null);
 		 appointmentDAO.saveAppointment(appointment);
 		 System.out.println("Successful");
 	      return "success";
 	   }
 	 
-	 public String cancelAppointment(int appointmentId)
+	 public String getAppointmentsForUser(){
+		 String userId = "swapnil";
+		 user.setUserId("swapnil");
+		 appointmentList = appointmentDAO.getAppointments(user);
+		 return "displayAppointments";
+	 }
+	 
+	 public String cancelAppointment()
 	 {
 		 System.out.println("*********");
-		 appointmentDAO.cancelAppointment(appointmentId);
+		 appointmentDAO.cancelAppointment(appointment.getAppointmentId());
 		 return "success";
 		 
 	 }
@@ -128,5 +135,14 @@ public class AppointmentAction extends ActionSupport
 		this.room = room;
 	}
 
+	public Appointment getAppointment() {
+		return appointment;
+	}
 
+	
+	public List<Appointment> getAppointmentList() {
+		return appointmentList;
+	}
+
+	
 }
