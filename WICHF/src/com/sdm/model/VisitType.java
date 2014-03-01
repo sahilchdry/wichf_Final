@@ -13,7 +13,15 @@ public class VisitType {
 	private int visitTypeId;
 	
 	@Column(name="visit_type")
-	private int visitType;
+	private String visitType;
+
+	public String getVisitType() {
+		return visitType;
+	}
+
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
+	}
 
 	public int getVisitTypeId() {
 		return visitTypeId;
@@ -23,13 +31,7 @@ public class VisitType {
 		this.visitTypeId = visitTypeId;
 	}
 
-	public int getVisitType() {
-		return visitType;
-	}
-
-	public void setVisitType(int visitType) {
-		this.visitType = visitType;
-	}
+	
 	
 	
 }

@@ -54,7 +54,7 @@ public class Appointment {
 	
 	@ManyToOne(targetEntity = VisitType.class)
     @JoinColumn(name="visit_type_id", referencedColumnName="visit_type_id")
-	private int visitTypeId;
+	private VisitType visitType;
 
 	public int getAppointmentId() {
 		return appointmentId;
@@ -88,12 +88,12 @@ public class Appointment {
 		this.bookedThrough = bookedThrough;
 	}
 
-	public int getVisitTypeId() {
-		return visitTypeId;
+	public VisitType getVisitType() {
+		return visitType;
 	}
 
-	public void setVisitTypeId(int visitTypeId) {
-		this.visitTypeId = visitTypeId;
+	public void setVisitType(VisitType visitType) {
+		this.visitType = visitType;
 	}
 
 	public Boolean getActive() {

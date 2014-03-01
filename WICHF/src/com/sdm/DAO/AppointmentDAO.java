@@ -79,6 +79,7 @@ public class AppointmentDAO {
 //			DetachedCriteria c = DetachedCriteria.forClass(Appointment.class);
 //			c.add(Restrictions.eq(String.valueOf(appointment.getDoctor().getDoctorId()), 45));
 //			c.getExecutableCriteria(session).;
+			 System.out.println("Appointment Room Id:"+appointment.getRoom().getRoomId());
 			session.save(appointment);
 			transaction.commit();
 			return appointment;
