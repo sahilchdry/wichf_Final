@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Make Appointment</title>
+<title>Insert title here</title>
 </head>
 <body>
- <form action="appointment">
-     	      <input type="text" name="userId" value="User Id"/>
-		      <input type="password" name="password" value="Password"/>
-		      <input type="submit" value="Say Hello"/>
-		   </form>
+
 </body>
 </html>
