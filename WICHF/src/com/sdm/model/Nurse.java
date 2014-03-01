@@ -1,5 +1,6 @@
 package com.sdm.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,8 +22,8 @@ public class Nurse {
 	@Column(name="status")
 	private String status;
 	
-	@OneToOne
-    @JoinColumn(name="user_id")
+	@OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id", referencedColumnName="user_id")
 	private User user;
 
 	public String getNurseId() {

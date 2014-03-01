@@ -8,11 +8,12 @@
 <title>Add Doctor</title>
 </head>
 <body>
-	<form action="addPatient">
+	<form action="addPatient" method="post">
 			 Health Card Number: <input type="text" name="healthCardNumber" />
-			 Birth Date(dd-mm-yyyy): <input type="text" class="date" name="birthDate" value="" />
+			 Birth Date(yyyy-mm-dd): <input type="text" class="date" name="birthDate" value="" />
 			 Gender(M/F):<input type="text" name="gender" value="" />
 			 Name:<input type="text" name="name" value="" />
+			 Phone No:<input type="text" name="phoneNumber" value="" />
 			 Annual CheckUp Done(Y/N): <input type="text" name="isAnnualCheckUpDone" value="" /> 
      	      <input type="text" name="user.userId" value="User Id"/>
 		      <input type="password" name="user.password" value="Password"/>

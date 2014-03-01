@@ -27,6 +27,7 @@
         <mapping class="com.sdm.model.Nurse" />
         <mapping class="com.sdm.model.Patient" />
         <mapping class="com.sdm.model.Appointment" />
- 
+ 		<mapping class="com.sdm.model.Room" />
+ 		<mapping class="com.sdm.model.VisitType" />
     </session-factory>
 </hibernate-configuration>

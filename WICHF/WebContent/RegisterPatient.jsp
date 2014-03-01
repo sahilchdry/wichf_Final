@@ -80,7 +80,8 @@
 		bgcolor="">
 		<tr bgcolor="">
 			<td align="center">
-			<form action="registerPatient" 	method="post" onsubmit="return validateForm(this);" >
+			<form action="registerPatient" 	method="post" >
+<!-- 			onsubmit="return validateForm(this);" > -->
 
 
 					<!--  <font color="red"> <html:errors /></font>-->
@@ -115,6 +116,11 @@
 						<tr bgcolor="#FFFFFF">
 							<td align="right"> <font size="3" face="Monotype Corsiva" style="color: #6699CC">Name: </font></td>
 							<td align="left"><input type="text" name="name" value="" /></td>
+							<td><font style="color: red">*</font></td>
+						</tr>
+						<tr bgcolor="#FFFFFF">
+							<td align="right"> <font size="3" face="Monotype Corsiva" style="color: #6699CC">Phone Number: </font></td>
+							<td align="left"><input type="text" name="phoneNumber" value="" /></td>
 							<td><font style="color: red">*</font></td>
 						</tr>
 						<tr bgcolor="#FFFFFF">
