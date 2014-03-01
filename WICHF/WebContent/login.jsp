@@ -20,12 +20,14 @@
   </TR>
   <TR>
     <TD>Password</TD>
-    <TD><INPUT TYPE="TEXT" NAME="password" SIZE="20"></TD>
+    <TD><INPUT TYPE="password" NAME="password" SIZE="20"></TD>
   </TR>
   <tr>
-  <td>
-  <INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1">
-  </td>
+  <td><input type="submit" value="Login" id="login">  </td>
+  <td><input type="button" value="Cancel" id="cancel"></td>
+  
+  
+  
   </tr>
 </TABLE>
 

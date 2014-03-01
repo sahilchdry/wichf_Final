@@ -94,12 +94,16 @@
     <TD><INPUT TYPE="TEXT" NAME="birthDate" value=" " SIZE="20"></TD>
   </TR>
   <TR>
-    <TD>Gender(M/F)</TD>
-    <TD><INPUT TYPE="TEXT" NAME="gender" value=" " SIZE="20"></TD>
+    <TD>Gender</TD>
+    
+    <td><input type="radio" name="gender" value="M">Male
+    <input type="radio" name="gender" value="F">Female</td>
   </TR>
   <TR>
-    <TD>Annual CheckUp Done(Y/N)</TD>
-    <TD><INPUT TYPE="TEXT" NAME="isAnnualCheckUpDone" value=" " SIZE="20"></TD>
+    <TD>Annual CheckUp Done</TD>
+    
+    <td><input type="radio" name="isAnnualCheckUpDone" value="Y">Yes
+    <input type="radio" name="isAnnualCheckUpDone" value="N">No</td>
   </TR>
   <TR>
     <TD>UserId</TD>

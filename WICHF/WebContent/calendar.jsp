@@ -975,9 +975,33 @@ window.onload = function () {
 </script>
 </head>
 <body>
-<h2>Popup</h2>
+<center><h2>Book Appointment</h2></center>
 <form id="placeholder" method="get" action="#">
-  <input id="popup_container" type="text" />
+<TABLE align="center" >
+<TR>
+    <TD>Choose day</TD>
+    <TD>
+      <input id="popup_container" type="text" />
+    </TD>
+    <td> <img src="images/click.png" height = "20" width = "30"></td>
+    
+  </TR>
+  <TR>
+    <TD>Type of visit</TD>
+    <TD><select>
+  <option value="Select">Select</option>
+  <option value="General">General</option>
+  <option value="Annual">Annual</option>
+  
+</select></TD>
+  </TR>
+  <tr>
+  <td>
+  <INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1">
+  </td>
+  </tr>
+</TABLE>
+
 </form>
 
 </body>
