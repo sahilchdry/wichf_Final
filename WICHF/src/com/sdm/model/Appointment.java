@@ -25,7 +25,7 @@ public class Appointment {
 	private String bookedThrough;
 	
 	@Column(name="active")
-	private Boolean active;
+	private int active;
 	
 	@Column(name="appointment_date")
 	private Date appointmentDate;
@@ -96,11 +96,11 @@ public class Appointment {
 		this.visitType = visitType;
 	}
 
-	public Boolean getActive() {
+	public int getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
 

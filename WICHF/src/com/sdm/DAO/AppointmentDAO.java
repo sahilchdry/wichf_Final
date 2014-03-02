@@ -84,15 +84,17 @@ public class AppointmentDAO {
 			return appointment;
 		   }
 		
-		public int cancelAppointment(int appointmentId) throws Exception
+		public int cancelOrUpdateAppointment(int appointmentId, int isActive) throws Exception
 		   {	
 			initializeTransaction();
 			String hql;
 			int result =0;
-			hql = "Update Appointment SET active = :active WHERE appointment_id = :appointmentId";
+			hql = "Update Appointment SET active = :active" +
+					" WHERE appointment_id = :appointmentId";
 			
 				Query query = session.createQuery(hql);
-				query.setParameter("active", false);
+				query.setParameter("active", isActive);
+			//	query.setParameter("booked_through", "test" );
 		    	query.setParameter("appointmentId", appointmentId);
 		    	result = query.executeUpdate();
 			transaction.commit();
@@ -134,7 +136,7 @@ public class AppointmentDAO {
 		
 		public void updateAppointment(Appointment appointment){
 			initializeTransaction();
-			session.saveOrUpdate(appointment);
+			session.merge(appointment);
 			
 		}
 		

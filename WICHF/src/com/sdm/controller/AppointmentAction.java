@@ -2,6 +2,10 @@ package com.sdm.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -10,12 +14,13 @@ import com.sdm.DAO.RoomDAO;
 import com.sdm.DAO.UserDAO;
 import com.sdm.model.Appointment;
 import com.sdm.model.Doctor;
+import com.sdm.model.Payment;
 import com.sdm.model.Room;
 import com.sdm.model.User;
 import com.sdm.model.VisitType;
 
 public class AppointmentAction extends ActionSupport 
-			implements ModelDriven<Appointment>{
+			implements ModelDriven<Appointment>, SessionAware{
 
 	
 	/**
@@ -26,6 +31,8 @@ public class AppointmentAction extends ActionSupport
 	private User user = new User();
 	private Doctor doctor = new Doctor();
 	private Room room = new Room();
+	private Payment payment = new Payment();
+	private SessionMap<String,Object> sessionMap;
 	
 	private VisitType visitType = new VisitType();
 	private List<Appointment> appointmentList = new ArrayList<Appointment>();
@@ -41,7 +48,7 @@ public class AppointmentAction extends ActionSupport
 	   {
 		 System.out.println("*********");
 		 //appointment.setAppointmentId();
-		 appointment.setActive(true);
+		 appointment.setActive(1);
 		 appointment.setBookedDate(null);
 		 appointment.setAppointmentDate(null);
 		 appointment.setBookedThrough("Nurse");
@@ -65,12 +72,20 @@ public class AppointmentAction extends ActionSupport
 	      return "success";
 	   }
 	 
+	
+	 
 	 public String ConfirmInactiveAppointment(){
 		 String result = "failure";
-		 appointment.setActive(true);
-		 appointmentDAO.updateAppointment(appointment);
-		 
+		 try{
+			 appointmentDAO.cancelOrUpdateAppointment(appointment.getAppointmentId(), 0);
+			 sessionMap.put("setActiveAppointmentId", appointment.getAppointmentId());
+			 result = "success";
+			 
+		 } catch (Exception e) {
+			result="failure";
+		 }
 		 return result;
+		 
 	 }
 	 public String getAppointmentsForUser(){
 		 String userId = "swapnil";
@@ -83,7 +98,7 @@ public class AppointmentAction extends ActionSupport
 	 {
 		 System.out.println("*********");
 		 try {
-			appointmentDAO.cancelAppointment(appointment.getAppointmentId());
+			appointmentDAO.cancelOrUpdateAppointment(appointment.getAppointmentId(),0);
 		} catch (Exception e) {
 			
 			return "failure";
@@ -156,5 +171,9 @@ public class AppointmentAction extends ActionSupport
 		return appointmentList;
 	}
 
+	@Override  
+	public void setSession(Map<String, Object> map) {  
+	    sessionMap=(SessionMap)map;  
+	}
 	
 }

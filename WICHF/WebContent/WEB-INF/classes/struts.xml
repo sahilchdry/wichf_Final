@@ -40,14 +40,26 @@
 <!--          <result name="displayAppointments">/userAppointments.jsp</result> -->
       </action>
       
+      <action name="cancelappointment" method="cancelAppointment"
+         class="com.sdm.controller.AppointmentAction">
+         <result name="success"> /cancelAppointment.jsp </result>
+         <result name="failure"> /home.jsp </result>
+      </action>
+      
       <action name="getAppointments" method="getAppointmentsForUser"
          class="com.sdm.controller.AppointmentAction">
          <result name="displayAppointments">/userAppointments.jsp</result>
       </action>
       
- <action name="updateappointment" method="updateAppointment"
+ 	<action name="updateappointment" method="updateAppointment"
          class="com.sdm.controller.AppointmentAction">
-         <result name="success"> /updateappointment.jsp </result>
+         <result name="success"> /updateAppointment.jsp </result>
+         <result name="failure"> /home.jsp </result>
+      </action>
+      
+      <action name="ConfirmInactiveAppointment" method="ConfirmInactiveAppointment"
+         class="com.sdm.controller.AppointmentAction">
+         <result name="success"> /payment.jsp </result>
          <result name="failure"> /home.jsp </result>
       </action>
       
