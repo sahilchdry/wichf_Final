@@ -62,10 +62,20 @@
       <div class="logo">
         <h2><a href="home.jsp"><em>Walk-in hassle clinics</em></a><span>Health Experts</span></h2>
       </div>
+      
+      
+      
       <div class="header_nav">
         <ul>
           <li><a href="home.jsp">Home</a></li>
-          <li><a href="login.jsp">Login</a></li>
+          
+          <%if((String)session.getAttribute("userId") != null){ %>
+				<li><a href="/WICHF/logout">Logout</a></li>
+		  <%}else{%>
+			    <li><a href="login.jsp">Login</a></li>
+		  <%}%>
+          
+          
           <li><a href="RegisterPatient.jsp">Registration</a></li>
           <li><a href="admin.jsp">Admin</a></li>
           <li class="last"><a href="developers.jsp">Developers</a></li>

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.dispatcher.SessionMap;  
 
@@ -54,6 +55,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
 		return result;
 	}
 
+	public String logout(){
+		String result = "failure";
+		HttpSession session=ServletActionContext.getRequest().getSession(false);  
+		if(session!=null){  
+			session.invalidate();
+			result = "success";
+		}
+		return result;		
+	}
+	
 	public String listUsers() {
 		users = userDAO.getUsers();
 		return "success";

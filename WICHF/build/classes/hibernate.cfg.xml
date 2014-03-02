@@ -31,5 +31,6 @@
         <mapping class="com.sdm.model.Appointment" />
  		<mapping class="com.sdm.model.Room" />
  		<mapping class="com.sdm.model.VisitType" />
+ 		<mapping class="com.sdm.model.Payment" />
     </session-factory>
 </hibernate-configuration>
