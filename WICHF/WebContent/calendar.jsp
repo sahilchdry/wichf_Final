@@ -649,7 +649,7 @@ Epoch.prototype.updatePos = function (target) //PUBLIC: moves the calendar's pos
 {
   this.calendar.style.top = this.getTop(target) + this.topOffset + 'px'
   this.calendar.style.left = this.getLeft(target) + this.leftOffset + 'px'
-}
+};
 //-----------------------------------------------------------------------------
 
 /*****************************************************************************/

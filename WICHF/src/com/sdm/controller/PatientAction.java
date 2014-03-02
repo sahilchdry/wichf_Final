@@ -36,7 +36,7 @@ public class PatientAction extends ActionSupport implements ModelDriven<Patient>
 		Date sysDate = new Date();
 		Calendar sysCalendar = new GregorianCalendar();
 		sysCalendar.setTime(sysDate);
-		int sysYear = calendar.get(Calendar.YEAR);
+		int sysYear = sysCalendar.get(Calendar.YEAR);
 		
 		if((sysYear-year)>=18){
 			patient.getUser().setAccessLevel("patient");

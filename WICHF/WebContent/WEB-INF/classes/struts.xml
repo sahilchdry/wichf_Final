@@ -71,6 +71,7 @@
       <action name="logout" method="logout"
          class="com.sdm.controller.UserAction">
          <result name="success">/home.jsp </result>
+         <result name="failure">/home.jsp </result>
       </action>
       
       <action name="">
