@@ -21,6 +21,32 @@
 .lorem p{ line-height:18px; }
 </style>
 <![endif]-->
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.active = false;
+        $('body').bind('click keypress', function() { $.active = true; });
+        checkActivity(480000, 10000, 0); // timeout = 2 minutes, interval = 1 minute.
+    });
+
+    function checkActivity(timeout, interval, elapsed) {
+        if ($.active) {
+            elapsed = 0;
+            $.active = false;
+            $.get('heartbeat');
+        }
+        if (elapsed < timeout) {
+            elapsed += interval;
+            setTimeout(function() {
+                checkActivity(timeout, interval, elapsed);
+            }, interval);
+        } else {
+            window.location = '/WICHF'; // Redirect to "session expired" page.
+        }
+    }
+</script>
 </head>
 
 <body>
