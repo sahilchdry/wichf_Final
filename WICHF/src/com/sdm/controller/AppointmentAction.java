@@ -65,6 +65,13 @@ public class AppointmentAction extends ActionSupport
 	      return "success";
 	   }
 	 
+	 public String ConfirmInactiveAppointment(){
+		 String result = "failure";
+		 appointment.setActive(true);
+		 appointmentDAO.updateAppointment(appointment);
+		 
+		 return result;
+	 }
 	 public String getAppointmentsForUser(){
 		 String userId = "swapnil";
 		 user.setUserId("swapnil");

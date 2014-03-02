@@ -45,6 +45,11 @@
          <result name="displayAppointments">/userAppointments.jsp</result>
       </action>
       
+ <action name="updateappointment" method="updateAppointment"
+         class="com.sdm.controller.AppointmentAction">
+         <result name="success"> /updateappointment.jsp </result>
+         <result name="failure"> /home.jsp </result>
+      </action>
       
       <action name="login" method="login"
          class="com.sdm.controller.UserAction">

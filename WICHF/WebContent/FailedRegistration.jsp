@@ -9,8 +9,8 @@
 <title>Registration Failure</title>
 </head>
 <body>
-
- Registration Failed !!
+</br></br>
+ Registration Failed !!</br></br>
  You need to be older than 18 years !!
 
 </body>
