@@ -26,8 +26,9 @@
       <action name="addPatient" method="addPatient"
          class="com.sdm.controller.PatientAction">
          <result name="success"> /patient.jsp </result>
-<!--          <result name="input"> /patient.jsp </result> -->
+		<result name="failure"> /FailedRegistration.jsp </result> 
       </action>
+      
       <action name="addNurse" method="addNurse"
          class="com.sdm.controller.NurseAction">
          <result name="success"> /nurse.jsp </result>

@@ -78,7 +78,7 @@
 <body>
 <center><h3>Registration</h3></center>
 	
-	<form action="registerPatient" 	method="post" onsubmit="return validateForm(this);" >
+	<form action="addPatient" 	method="post" onsubmit="return validateForm(this);" >
 <TABLE align="center">
   <TR>
     <TD>Name</TD>
