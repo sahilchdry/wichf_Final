@@ -84,25 +84,18 @@ public class AppointmentDAO {
 			return appointment;
 		   }
 		
-		public int cancelAppointment(int appointmentId)
+		public int cancelAppointment(int appointmentId) throws Exception
 		   {	
 			initializeTransaction();
 			String hql;
 			int result =0;
-			hql = "UPDATE APPOINTMENT SET ACTIVE = :active WHERE appointment_id = :appointmentId";
-			try{
-				Query query = session.createQuery(hql);
-				query.setParameter(":active", false);
-		    	query.setParameter(":appointmentId", appointmentId);
-		    	result = query.executeUpdate();
-				
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-				
-				
-			}
+			hql = "Update Appointment SET active = :active WHERE appointment_id = :appointmentId";
 			
+				Query query = session.createQuery(hql);
+				query.setParameter("active", false);
+		    	query.setParameter("appointmentId", appointmentId);
+		    	result = query.executeUpdate();
+			transaction.commit();
 			return result;
 		   }
 		
