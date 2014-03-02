@@ -4,7 +4,7 @@
 <%@ include file="header.jsp" %>
 <html>
 <head>
-<title>Minimum Required Code - Epoch DHTML Javascript Calendar</title>
+<title>Doctor</title>
 
 <style rel="stylesheet" type="text/css">
 table.calendar {
@@ -959,35 +959,26 @@ window.onload = function () {
 </script>
 </head>
 <body>
-<center><h2>Book Appointment</h2></center>
+<center><h3>Welcome Doctor!</h3></center>
 <form id="placeholder" method="get" action="#">
 <TABLE align="center" >
 <TR>
-    <TD>Choose day</TD>
+<td  width="19"><img src="images/nmenu.png" height = "30" width = "30"></td>
+    <TD>Update Appointment</TD>
     <TD>
       <input id="popup_container" type="text" />
     </TD>
-    <td> <img src="images/click.png" height = "20" width = "30"></td>
+    
+    <td><input type="submit" value="submit" id="cancel">  </td>
     
   </TR>
-  <TR>
-    <TD>Type of visit</TD>
-    <TD><select>
-  <option value="Select">Select</option>
-  <option value="General">General</option>
-  <option value="Annual">Annual</option>
-  
-</select></TD>
-  </TR>
-  <tr>
-  <td>
-  <INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1">
-  </td>
-  </tr>
-</TABLE>
+        
+        
+        
+        
+        
+        
+        </table>
 
-</form>
 
-</body>
-
-</html>
+<%@ include file="footer.jsp" %>
