@@ -70,15 +70,22 @@
           <li><a href="home.jsp">Home</a></li>
           
           <%if((String)session.getAttribute("userId") != null){ %>
+				
 				<li><a href="/WICHF/logout">Logout</a></li>
+				
+				<li><a href="updateAccount.jsp">Update Account</a></li>
+		  
 		  <%}else{%>
 			    <li><a href="login.jsp">Login</a></li>
+         
+         		<li><a href="RegisterPatient.jsp">Registration</a></li>
+          
+         		<li><a href="admin.jsp">Admin</a></li>
+          
+         		<li class="last"><a href="developers.jsp">Developers</a></li>
 		  <%}%>
           
           
-          <li><a href="RegisterPatient.jsp">Registration</a></li>
-          <li><a href="admin.jsp">Admin</a></li>
-          <li class="last"><a href="developers.jsp">Developers</a></li>
         </ul>
         <div class="clear"></div>
       </div>

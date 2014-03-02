@@ -25,7 +25,7 @@
       </action>
       <action name="addPatient" method="addPatient"
          class="com.sdm.controller.PatientAction">
-         <result name="success"> /patient.jsp </result>
+         <result name="success"> /home.jsp </result>
 		<result name="failure"> /FailedRegistration.jsp </result> 
       </action>
       
@@ -65,7 +65,13 @@
       
       <action name="login" method="login"
          class="com.sdm.controller.UserAction">
-         <result name="success">/home.jsp </result>
+         <result name="success">/patientmenu.jsp </result>
+      </action>
+      
+      <action name="updateAccount" method="updateAccount"
+         class="com.sdm.controller.PatientAction">
+         <result name="success">/patientmenu.jsp </result>
+         <result name="failure">/failedUpdate.jsp </result>
       </action>
       
       <action name="logout" method="logout"

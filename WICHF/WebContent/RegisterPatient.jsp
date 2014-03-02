@@ -94,6 +94,10 @@
     <TD><INPUT TYPE="TEXT" NAME="birthDate" value=" " SIZE="20"></TD>
   </TR>
   <TR>
+    <TD>Contact Number</TD>
+    <TD><INPUT TYPE="TEXT" NAME="phone" value=" " SIZE="20"></TD>
+  </TR>
+  <TR>
     <TD>Gender</TD>
     
     <td><input type="radio" name="gender" value="M">Male
