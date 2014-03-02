@@ -75,7 +75,12 @@ public class AppointmentAction extends ActionSupport
 	 public String cancelAppointment()
 	 {
 		 System.out.println("*********");
-		 appointmentDAO.cancelAppointment(appointment.getAppointmentId());
+		 try {
+			appointmentDAO.cancelAppointment(appointment.getAppointmentId());
+		} catch (Exception e) {
+			
+			return "failure";
+		}
 		 return "success";
 		 
 	 }
