@@ -28,10 +28,7 @@ public class PatientAction extends ActionSupport implements ModelDriven<Patient>
 	
 	public String addPatient() {
 		String result="failure";
-		System.out.println("*********");
-		System.out.println(patient.getUser().getUserId());
-		System.out.println(patient.getUser().getPassword());
-		System.out.println(patient.getBirthDate()); 
+		
 		Date date = patient.getBirthDate();
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
