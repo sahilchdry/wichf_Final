@@ -71,7 +71,7 @@ window.onload = function () {
   	</s:if>
   	<s:else>
   		<td>
-	  		<INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1">
+	  		<INPUT align="middle" TYPE="SUBMIT" VALUE="Submit" NAME="B1"><input type="button" onclick="location.href('patientmenu.jsp');" value="cancel">
 	  </td>
 	  </s:else>
   </tr>
