@@ -64,9 +64,16 @@ window.onload = function () {
   </tr>
   
   <tr>
-  	<td>
+  	<s:if test="showApointments">
+  		<td>
 	  <INPUT TYPE="SUBMIT" VALUE="Add to Cart" NAME="B1">
 	  </td>
+  	</s:if>
+  	<s:else>
+  		<td>
+	  		<INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1">
+	  </td>
+	  </s:else>
   </tr>
   
 </TABLE>

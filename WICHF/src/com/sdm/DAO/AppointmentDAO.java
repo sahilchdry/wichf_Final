@@ -137,6 +137,32 @@ public class AppointmentDAO {
 			}
 			return appointmentList;
 		}
+		
+		
+		public List<Appointment> getAppointments(String userId) {
+			//List obj
+			//Get all active appointments
+			List<Appointment> appointmentList = new ArrayList<Appointment>();
+			initializeTransaction();
+			String hql;
+			hql = "FROM Appointment WHERE active = :active and user_id = :userId";
+			try
+			{
+				Query query = session.createQuery(hql);
+				query.setParameter("active", true);
+		    	  query.setParameter("userId",userId);
+		    	  appointmentList = (query.list()!=null)?(List<Appointment>) query.list() :null;
+		    	  
+		    	  //appointmentList = (List<Appointment>) session.createQuery("from Appointment where user_id =").setParameter("", arg1)
+		    	  transaction.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			return appointmentList;
+		}
+		
 		public List<Appointment> getAppointmentsForTimeSlot(java.util.Date date) {
 			//List obj
 			//Get all active appointments

@@ -45,7 +45,8 @@ public class AppointmentAction extends ActionSupport
 	public String datepick,visitTypeSelect,selectedSlot;
 	
 	private VisitType visitType = new VisitType();
-	public List<Appointment> appointmentList = new ArrayList<Appointment>();
+	public List<Appointment> tempAppointmentList = new ArrayList<Appointment>();
+	public List<Appointment> appointmentHistory = new ArrayList<Appointment>();
 	public List<VisitType> visitTypeList = new ArrayList<VisitType>();
 	private AppointmentDAO appointmentDAO = new AppointmentDAO();
 	private UserDAO userDAO = new UserDAO();
@@ -58,7 +59,7 @@ public class AppointmentAction extends ActionSupport
 		return appointment;
 	}
 	
-	 public String makeAppointment()
+	 public String addToCart()
 	   {
 		 System.out.println("Finally:"+selectedSlot);
 		 System.out.println("*********");
@@ -92,7 +93,8 @@ public class AppointmentAction extends ActionSupport
 		 appointment.setRoom(room); 
 		 
 		 if(sessionMap.get("timeslot") != null){
-			 int timeslt = (int)sessionMap.get("timeslot");
+			 int timeslt = (int)  sessionMap.get("timeslot");
+					 //Integer.parseInt((String)sessionMap.get("timeslot"));
 			 appointment.setTimeSlot(timeslt);
 		 }
 		 String str = getFormattedDate((String)sessionMap.get("aptDateSelected"),
@@ -108,7 +110,8 @@ public class AppointmentAction extends ActionSupport
 		 if( sessionMap.get("userId") != null){
 			 user.setUserId((String)sessionMap.get("userId"));
 		 }else{
-			 user.setUserId("swapnil");
+			 //User has not logged in
+			 //user.setUserId("swapnil");
 		 }
 		 //user.setUserId("swapnil");
 		 appointment.setUser(user);
@@ -116,17 +119,30 @@ public class AppointmentAction extends ActionSupport
 		 //appointmentDAO.saveAppointment(appointment);
 		 
 		 if(sessionMap.get("toSaveAptList") != null){
-			 appointmentList =  (List<Appointment>) sessionMap.get("toSaveAptList");
+			 tempAppointmentList =  (List<Appointment>) sessionMap.get("toSaveAptList");
 		 }
 		 
-		 appointmentList.add(appointment);
-		 sessionMap.put("toSaveAptList", appointmentList);
+		 tempAppointmentList.add(appointment);
+		 sessionMap.put("toSaveAptList", tempAppointmentList);
 		
 		 System.out.println("Successful");
 	      return "success";
 	   }
 	 
-	
+	public String userAppointmentHistory(){
+		 String userId;
+		//Saved 
+		 if(sessionMap.get("toSaveAptList") != null){
+			 tempAppointmentList =  (List<Appointment>) sessionMap.get("toSaveAptList");
+		 }
+		 //Get the user earlier booked history
+		 if( sessionMap.get("userId") != null){
+			 userId = (String)sessionMap.get("userId");
+			 appointmentHistory = appointmentDAO.getAppointments(userId);
+		 }
+		
+		return "success";
+	}
 	 
 	 private java.sql.Date getFormattedDate(String inputDate,int hourOfTheDay, int minute) {
 		 String[] selectedDateArr = inputDate.split("/");
@@ -155,8 +171,8 @@ public class AppointmentAction extends ActionSupport
 	 public String getAppointmentsForUser(){
 
 		 user.setUserId("swapnil");
-		 appointmentList.clear();
-		 appointmentList = appointmentDAO.getAppointments(user);
+		 tempAppointmentList.clear();
+		 tempAppointmentList = appointmentDAO.getAppointments(user);
 		 return "displayAppointments";
 	 }
 	 
@@ -191,6 +207,33 @@ public class AppointmentAction extends ActionSupport
 		 showApointments = false;
 		 return "success";
 	 }
+	 
+	 public String saveSessionAppointments(){
+		 String redirection="success";
+		 String userId ="";
+		 if( sessionMap.get("userId") != null){
+			 if(sessionMap.get("toSaveAptList") != null){
+				 tempAppointmentList = (List<Appointment>) sessionMap.get("toSaveAptList");
+			 }
+			 //Get the user earlier booked history
+			 if( sessionMap.get("userId") != null){
+				 userId = (String)sessionMap.get("userId");
+				 appointmentHistory = appointmentDAO.getAppointments(userId);
+			 }
+			 
+			 for(Appointment appointment : tempAppointmentList){
+				 appointmentDAO.saveAppointment(appointment);
+			 }
+			 //Removing after the appointments are saved.
+			 if(sessionMap.get("toSaveAptList") != null)
+				 sessionMap.remove("toSaveAptList");
+			 redirection = "success";
+		 }else{
+			 //redirection = "loginRequired";
+		 }
+		 return redirection;
+	 }
+	 
 	 public String getAvailableTimeslots()
 	 {
 		 int timeslot=20;
@@ -364,7 +407,7 @@ public class AppointmentAction extends ActionSupport
 
 	public String listAppointments()
 	   {
-		  appointmentList = appointmentDAO.getAppointments(user);
+		  tempAppointmentList = appointmentDAO.getAppointments(user);
 	      return "success";
 	   }
 
@@ -407,7 +450,7 @@ public class AppointmentAction extends ActionSupport
 
 	
 	public List<Appointment> getAppointmentList() {
-		return appointmentList;
+		return tempAppointmentList;
 	}
 
 	@Override  
@@ -428,7 +471,7 @@ public class AppointmentAction extends ActionSupport
 	}
 
 	public void setAppointmentList(List<Appointment> appointmentList) {
-		this.appointmentList = appointmentList;
+		this.tempAppointmentList = appointmentList;
 	}
 
 	public List<VisitType> getVisitTypeList() {
@@ -453,6 +496,14 @@ public class AppointmentAction extends ActionSupport
 
 	public void setDatepick(String datepick) {
 		this.datepick = datepick;
+	}
+
+	public List<Appointment> getAppointmentHistory() {
+		return appointmentHistory;
+	}
+
+	public void setAppointmentHistory(List<Appointment> appointmentHistory) {
+		this.appointmentHistory = appointmentHistory;
 	}
 	
 }
