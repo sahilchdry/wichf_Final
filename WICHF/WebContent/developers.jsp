@@ -5,33 +5,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Developers</title>
 </head>
 <body>
-<div class="wrapper"> 
- <div class="container"> 
- <div class="main_content">
-        <center><h2>Featured services</h2></center>
-        
-        <div class="lorem">
-          <h3>Swapnil</h3>
-          <img src="images/loram_img2.jpg" width="66" height="54" alt="img" align="left" />
-          <p></p>
-        </div>
-        <div class="lorem">
-          <h3>Pratik Bidkar</h3>
-          <img src="images/pratik.jpg" width="66" height="54" alt="img" align="left" />
-          <p></p>
-        </div>
-        <div class="lorem">
-          <h3>Ankita Mishra</h3>
-          <img src="images/ankita.jpg" width="66" height="54" alt="img" align="left" />
-          <p> </p>
-        </div>
-        
-      </div>
-      <div class="clear"></div>
-  </div>
-</div>
+<center><h2>Developers</h2></center>
+<TABLE align="center">
+  <TR>
+    <TD><IMG BORDER="0" ALIGN="Left" width="75" height="75" SRC="images/swapnil.jpg"> </TD>
+    <TD>Swapnil Warke </TD>
+ 
+  </TR>
+  <TR>
+    
+    <TD><IMG BORDER="0" ALIGN="Left" width="75" height="75" SRC="images/pratik.jpg">  </TD>
+    <TD>Pratik Bidkar</TD>
+  </TR>
+  <TR>
+    
+    <TD><IMG BORDER="0" ALIGN="Left" width="75" height="75" SRC="images/ankita.jpg">  </TD>
+    <TD>Ankita Mishra </TD>
+  </TR>
   
+  <TR>
+    
+    <TD><IMG BORDER="0" ALIGN="Left" width="75" height="75" SRC="images/sahil.jpg">   </TD>
+    <TD>Sahil Chaudary </TD>
+  </TR>
+  
+  <TR>
+    
+    <TD><IMG BORDER="0" ALIGN="Left" width="75" height="75" SRC="images/vishnu.jpg"> </TD>
+    <TD>Vishnu Vardhan Rajmohan </TD>
+  </TR>
+  </TABLE>
+  
+
+
+
+
+
 <%@ include file="footer.jsp" %>
