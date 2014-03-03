@@ -6,7 +6,7 @@
 
 <center><h3>Payment</h3></center>
 	
-	<form>
+	<form action="doPayment" method="post">
 <TABLE align="center">
   <TR>
     <TD>Card Holder's Name</TD>
@@ -33,7 +33,7 @@
   </TR>
   <tr>
   <td>
-  <INPUT align="middle" TYPE="SUBMIT" VALUE="Register" NAME="B1">
+  <INPUT align="middle" TYPE="SUBMIT" VALUE="Confirm Payment" NAME="B1">
   </td>
   </tr>
   

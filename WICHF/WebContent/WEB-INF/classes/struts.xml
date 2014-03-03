@@ -54,6 +54,13 @@
 <!--          <result name="displayAppointments">/userAppointments.jsp</result> -->
 <!--       </action> -->
       
+      
+      <action name="doPayment" method="doPayment"
+         class="com.sdm.controller.PaymentAction">
+         <result name="success">/PaymentSuccess.jsp</result>
+         <result name="failure">/payment.jsp</result>
+      </action>
+      
       <action name="bookAppointment" method="bookAppointment"
          class="com.sdm.controller.AppointmentAction">
          <result name="success">/calendar.jsp</result>
