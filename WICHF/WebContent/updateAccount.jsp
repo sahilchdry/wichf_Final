@@ -57,7 +57,7 @@
   
   <TR>
     <TD>Contact Number</TD>
-    <TD><INPUT TYPE="TEXT" NAME="phone" value=" " SIZE="20"></TD>
+    <TD><INPUT TYPE="TEXT" NAME="phoneNumber" value=" " SIZE="20"></TD>
   </TR>
   
   <TR>
