@@ -47,7 +47,7 @@ public class AppointmentAction extends ActionSupport
 	private UserDAO userDAO = new UserDAO();
 	private RoomDAO roomDAO = new RoomDAO();
 	private DoctorDAO doctorDAO = new DoctorDAO();
-	
+	List<AvailableTimeSlotGrid> availableList = new ArrayList<AvailableTimeSlotGrid>();
 	@Override
 	public Appointment getModel() {
 		return appointment;
@@ -152,7 +152,7 @@ public class AppointmentAction extends ActionSupport
 		 System.out.println(cal.getTime());
 		 List<Appointment> appointments = appointmentDAO.getAppointmentsForTimeSlot(new Date(cal.getTimeInMillis()));
 		 System.out.println(appointments.size());
-		 List<AvailableTimeSlotGrid> availableList = new ArrayList<AvailableTimeSlotGrid>();
+		 //List<AvailableTimeSlotGrid> availableList = new ArrayList<AvailableTimeSlotGrid>();
 		 manipulateTheGrid(doctorList,roomList,appointments,availableList,timeslot);
 		 //Step 4: Fetch the remaining time slots
 		 printToConsole(availableList);
@@ -325,6 +325,22 @@ public class AppointmentAction extends ActionSupport
 	@Override  
 	public void setSession(Map<String, Object> map) {  
 	    sessionMap=(SessionMap)map;  
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	public void setAppointmentList(List<Appointment> appointmentList) {
+		this.appointmentList = appointmentList;
 	}
 	
 }
