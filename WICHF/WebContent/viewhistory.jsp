@@ -30,7 +30,8 @@
 		</tr> 
 	</table>
 	
-	
+	</br></br>
+	<h5>Past Appointments</h5>
 	<table border="3" align="center">
 		<tr> 
 		<th> Appointment Id </th>

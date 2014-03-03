@@ -45,6 +45,14 @@ window.onload = function () {
 	    	</select>
 	  		</td>
 	  	</tr>
+	  	<tr>
+	  		<%if((String)session.getAttribute("accessLevel") != ("patient")){ %>
+				
+				<TD>UserId</TD>
+   				 <TD><INPUT TYPE="TEXT" NAME="user_Id" value=" " SIZE="20"></TD>
+		  
+		  <%}%>
+	  	</tr>
  </s:if>	
 	  <tr>
 	  	

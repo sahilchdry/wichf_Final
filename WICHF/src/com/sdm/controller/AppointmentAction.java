@@ -46,6 +46,7 @@ public class AppointmentAction extends ActionSupport
 	
 
 	public String datepick,visitTypeSelect,selectedSlot;
+	public String user_Id;
 	
 	private VisitType visitType = new VisitType();
 	public List<Appointment> tempAppointmentList = new ArrayList<Appointment>();
@@ -64,6 +65,11 @@ public class AppointmentAction extends ActionSupport
 	
 	 public String addToCart()
 	   {
+		 String accessLevel = (String) sessionMap.get("accessLevel");
+		 System.out.println("accessLevel"+accessLevel);
+		 if(!(accessLevel.equals("patient"))){
+			 user.setUserId((String) sessionMap.get("userIdForNurseReg"));
+		 }
 		 System.out.println("Finally:"+selectedSlot);
 		 System.out.println("*********");
 		 //appointment.setAppointmentId();
@@ -110,7 +116,7 @@ public class AppointmentAction extends ActionSupport
 		 }
 		 appointment.setVisitType(visitTypeDAO.getVisitTypeById(visitType.getVisitTypeId())); //need to put visit type id object
 		 
-		 if( sessionMap.get("userId") != null){
+		 if( sessionMap.get("userId") != null && accessLevel.equals("patient")){
 			 user.setUserId((String)sessionMap.get("userId"));
 		 }else{
 			 //User has not logged in
@@ -249,6 +255,7 @@ public class AppointmentAction extends ActionSupport
 	 
 	 public String getAvailableTimeslots()
 	 {
+		 sessionMap.put("userIdForNurseReg", user_Id);
 		 int timeslot=20;
 		 String selectedDate = "03/03/2014";
 		 System.out.println("Form values:"+datepick +"|"+visitTypeSelect+"|"+selectedSlot);
