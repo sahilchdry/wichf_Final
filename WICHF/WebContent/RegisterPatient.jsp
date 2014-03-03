@@ -121,12 +121,8 @@
     <TD>Re Enter Password</TD>
     <TD><INPUT TYPE="TEXT" NAME="Spassword" value=" " SIZE="20"></TD>
   </TR>
-  <tr>
-  <td>
-  <INPUT align="middle" TYPE="SUBMIT" VALUE="Register" NAME="B1">
-  </td>
-  </tr>
+  
 </TABLE>
-
+<center><INPUT align="middle" TYPE="SUBMIT" VALUE="Register" NAME="B1"><input type="button" onclick="location.href('home.jsp');" value="cancel"></center>
 </form>
 <%@ include file="footer.jsp" %>
