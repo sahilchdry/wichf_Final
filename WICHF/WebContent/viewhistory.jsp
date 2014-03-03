@@ -40,16 +40,15 @@
 		<th> Doctor Name</th>
 		</tr>	
 			
-			
-	
-		<tr> 
 		<s:iterator value="appointmentHistory">
+		<tr>
 			<td><s:property value="appointmentId"/><br></td>
 			<td><s:property value="startTimeStr"/><br></td>
 			<td><s:property value="visitType.visitType"/><br></td>
 			<td><s:property value="doctor.doctorName"/><br></td>
+		</tr>
 		</s:iterator>
-		</tr> 
+		 
 	</table>
 	
 	

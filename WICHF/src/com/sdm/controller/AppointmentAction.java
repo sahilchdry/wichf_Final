@@ -212,8 +212,14 @@ public class AppointmentAction extends ActionSupport
 		 String redirection="success";
 		 String userId ="";
 		 if( sessionMap.get("userId") != null){
+			 tempAppointmentList.clear();
 			 if(sessionMap.get("toSaveAptList") != null){
 				 tempAppointmentList = (List<Appointment>) sessionMap.get("toSaveAptList");
+				 
+
+				 for(Appointment appointment : tempAppointmentList){
+					 appointmentDAO.saveAppointment(appointment);
+				 }
 			 }
 			 //Get the user earlier booked history
 			 if( sessionMap.get("userId") != null){
@@ -221,9 +227,6 @@ public class AppointmentAction extends ActionSupport
 				 appointmentHistory = appointmentDAO.getAppointments(userId);
 			 }
 			 
-			 for(Appointment appointment : tempAppointmentList){
-				 appointmentDAO.saveAppointment(appointment);
-			 }
 			 //Removing after the appointments are saved.
 			 if(sessionMap.get("toSaveAptList") != null)
 				 sessionMap.remove("toSaveAptList");

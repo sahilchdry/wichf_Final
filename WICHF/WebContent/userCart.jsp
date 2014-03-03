@@ -5,7 +5,13 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
-
+<script type="text/javascript">
+	
+	function cancelAction()
+	{	
+	document.location.href("payment.jsp"); 
+	}
+</script>
 <title>User Cart</title>
 
 </head>
@@ -37,15 +43,11 @@
 	  
 	  <tr>
 	  	<td>
-	  	<input type="button" onclick="location.href('/WICHF/saveSessionAppointments');" value="Save Appointment">
-		 
-		  
+	  	<input type="submit"  value="Save Appointment">
 		  </td>
-		  <td>
-		  <input type="button" onclick="location.href('/WICHF/payment.jsp');" value="Confirm & Pay">
 		  
 		  
-		  </td>
+		  <td><a href="" onclick="javascript:cancelAction();"><input type="button" value="Pay" name="pay"></a></td>
 	  </tr>
 	  
 </TABLE>

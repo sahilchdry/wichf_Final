@@ -149,7 +149,7 @@ public class AppointmentDAO {
 			try
 			{
 				Query query = session.createQuery(hql);
-				query.setParameter("active", true);
+				query.setParameter("active", 0);
 		    	  query.setParameter("userId",userId);
 		    	  appointmentList = (query.list()!=null)?(List<Appointment>) query.list() :null;
 		    	  
