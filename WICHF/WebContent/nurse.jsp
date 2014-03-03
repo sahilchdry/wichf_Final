@@ -34,7 +34,7 @@
   
   <TR>
     <TD>Password</TD>
-    <TD><INPUT TYPE="TEXT" NAME="user.password" value="Password" SIZE="20"></TD>
+    <TD><INPUT TYPE="password" NAME="user.password" value="Password" SIZE="20"></TD>
   </TR>
   
 </TABLE>
