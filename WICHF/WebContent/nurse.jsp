@@ -38,7 +38,7 @@
   </TR>
   
 </TABLE>
-		    <INPUT align="middle" TYPE="SUBMIT" VALUE="Add nurse" NAME="B1">
+		     <center><INPUT align="middle" TYPE="SUBMIT" VALUE="Add Doctor" NAME="B1"><input type="button" onclick="location.href('admin.jsp');" value="cancel"></center>
 		
 		   </form>
    		<%@ include file="footer.jsp" %>

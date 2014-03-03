@@ -34,11 +34,11 @@
   
   <TR>
     <TD>Password</TD>
-    <TD><INPUT TYPE="TEXT" NAME="user.password" value="Password" SIZE="20"></TD>
+    <TD><INPUT TYPE="password" NAME="user.password" value="Password" SIZE="20"></TD>
   </TR>
   
 </TABLE>
-		    <INPUT align="middle" TYPE="SUBMIT" VALUE="Add Doctor" NAME="B1">
+		    <center><INPUT align="middle" TYPE="SUBMIT" VALUE="Add Doctor" NAME="B1"><input type="button" onclick="location.href('admin.jsp');" value="cancel"></center>
 		
 		   </form>
    		
