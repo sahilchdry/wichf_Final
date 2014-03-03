@@ -18,6 +18,7 @@ import com.sdm.DAO.AppointmentDAO;
 import com.sdm.DAO.DoctorDAO;
 import com.sdm.DAO.RoomDAO;
 import com.sdm.DAO.UserDAO;
+import com.sdm.DAO.VisitTypeDAO;
 import com.sdm.model.Appointment;
 import com.sdm.model.AvailableTimeSlotGrid;
 import com.sdm.model.Doctor;
@@ -40,14 +41,18 @@ public class AppointmentAction extends ActionSupport
 	private Room room = new Room();
 	private Payment payment = new Payment();
 	private SessionMap<String,Object> sessionMap;
+	public boolean showApointments = false;
+	public String datepick,visitTypeSelect,selectedSlot;
 	
 	private VisitType visitType = new VisitType();
-	private List<Appointment> appointmentList = new ArrayList<Appointment>();
+	public List<Appointment> appointmentList = new ArrayList<Appointment>();
+	public List<VisitType> visitTypeList = new ArrayList<VisitType>();
 	private AppointmentDAO appointmentDAO = new AppointmentDAO();
 	private UserDAO userDAO = new UserDAO();
 	private RoomDAO roomDAO = new RoomDAO();
 	private DoctorDAO doctorDAO = new DoctorDAO();
-	List<AvailableTimeSlotGrid> availableList = new ArrayList<AvailableTimeSlotGrid>();
+	private VisitTypeDAO visitTypeDAO = new VisitTypeDAO();
+	public List<AvailableTimeSlotGrid> availableTmSlotList = new ArrayList<AvailableTimeSlotGrid>();
 	@Override
 	public Appointment getModel() {
 		return appointment;
@@ -55,38 +60,86 @@ public class AppointmentAction extends ActionSupport
 	
 	 public String makeAppointment()
 	   {
+		 System.out.println("Finally:"+selectedSlot);
 		 System.out.println("*********");
 		 //appointment.setAppointmentId();
+		 //Finally:9:40_1|2|3|4|5|6|7|_1|2|3|4|5|_5
+		 String [] selectedSlotArr = selectedSlot.split("_");
 		 appointment.setActive(0);
-		 appointment.setBookedDate(null);
-		 appointment.setAppointmentDate(null);
-		 appointment.setBookedThrough("Nurse");
-		 doctor.setDoctorId(1);
+		 
+		 appointment.setBookedDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+		 if(sessionMap.get("aptDateSelected")!=null){
+			 appointment.setAppointmentDate(getFormattedDate((String)sessionMap.get("aptDateSelected"),0,0));
+		 }
+		 
+		 appointment.setBookedThrough("patient");
+		 String[] doctorArray =  selectedSlotArr[1].split("\\|");
+		 int doctorId = Integer.parseInt(doctorArray[0]);
+		 String[] roomArray =  selectedSlotArr[2].split("\\|");
+		 int roomId = Integer.parseInt(roomArray[0]);
+		 String[] timeArray = selectedSlotArr[0].split(":");
+		 int aptHourOfTheDay = Integer.parseInt(timeArray[0]);
+		 int aptMinute = Integer.parseInt(timeArray[1]);
+		 
+		 //doctor.setDoctorId(doctorId);
+		 doctor = doctorDAO.getDoctorById(doctorId);
 		 appointment.setDoctor(doctor);
 		
 		 System.out.println(doctor.getDoctorId());
-		 room.setRoomId(2);
+		 room.setRoomId(roomId);
 		 
 		 //room = roomDAO.getRoomById(1);
 		 appointment.setRoom(room); 
-		 java.util.Calendar calendar = java.util.Calendar.getInstance();
-		 appointment.setTimeSlot(20);
-		 appointment.setStartTimeStr("2014-03-03 09:40:00");
 		 
-		 visitType.setVisitTypeId(1);
-		 appointment.setVisitType(visitType); //need to put visit type id object
+		 if(sessionMap.get("timeslot") != null){
+			 int timeslt = (int)sessionMap.get("timeslot");
+			 appointment.setTimeSlot(timeslt);
+		 }
+		 String str = getFormattedDate((String)sessionMap.get("aptDateSelected"),
+				 aptHourOfTheDay,aptMinute).toString() + " "+timeArray[0]+":"+timeArray[1];
+		 appointment.setStartTimeStr(str);
+		 if( sessionMap.get("visitTypeSelect") != null){
+			 visitType.setVisitTypeId(Integer.parseInt((String)sessionMap.get("visitTypeSelect")));
+		 }else{
+			 visitType.setVisitTypeId(1);
+		 }
+		 appointment.setVisitType(visitTypeDAO.getVisitTypeById(visitType.getVisitTypeId())); //need to put visit type id object
 		 
-		 user.setUserId("swapnil");
+		 if( sessionMap.get("userId") != null){
+			 user.setUserId((String)sessionMap.get("userId"));
+		 }else{
+			 user.setUserId("swapnil");
+		 }
+		 //user.setUserId("swapnil");
 		 appointment.setUser(user);
 		 appointment.setParentAppointmentId(null);
-		 appointmentDAO.saveAppointment(appointment);
+		 //appointmentDAO.saveAppointment(appointment);
+		 
+		 if(sessionMap.get("toSaveAptList") != null){
+			 appointmentList =  (List<Appointment>) sessionMap.get("toSaveAptList");
+		 }
+		 
+		 appointmentList.add(appointment);
+		 sessionMap.put("toSaveAptList", appointmentList);
+		
 		 System.out.println("Successful");
 	      return "success";
 	   }
 	 
 	
 	 
-	 public String ConfirmInactiveAppointment(){
+	 private java.sql.Date getFormattedDate(String inputDate,int hourOfTheDay, int minute) {
+		 String[] selectedDateArr = inputDate.split("/");
+		 Calendar cal = new GregorianCalendar(Integer.parseInt(selectedDateArr[2]),
+				 					(Integer.parseInt(selectedDateArr[0]) -1),
+				 						Integer.parseInt(selectedDateArr[1]),
+				 						hourOfTheDay,
+				 						minute
+				 							);
+		return new java.sql.Date(cal.getTimeInMillis());
+	}
+
+	public String ConfirmInactiveAppointment(){
 		 String result = "failure";
 		 try{
 			 appointmentDAO.cancelOrUpdateAppointment(appointment.getAppointmentId(), 0);
@@ -102,6 +155,7 @@ public class AppointmentAction extends ActionSupport
 	 public String getAppointmentsForUser(){
 
 		 user.setUserId("swapnil");
+		 appointmentList.clear();
 		 appointmentList = appointmentDAO.getAppointments(user);
 		 return "displayAppointments";
 	 }
@@ -129,14 +183,44 @@ public class AppointmentAction extends ActionSupport
 //		return "success";
 //	 }
 
+	 public String bookAppointment(){
+		 
+		 //Set list of available appointment
+		 visitTypeList = visitTypeDAO.getVisitTypes();
+		 System.out.println("Size"+visitTypeList.size());
+		 showApointments = false;
+		 return "success";
+	 }
 	 public String getAvailableTimeslots()
 	 {
-		 String selectedDate = "2014-03-03";
-		 String[] selectedDateArr = selectedDate.split("-");
-		 Calendar cal = new GregorianCalendar(Integer.parseInt(selectedDateArr[0]),
-				 							(Integer.parseInt(selectedDateArr[1]) -1),
-				 							Integer.parseInt(selectedDateArr[2]));
-		 int timeslot = 60;
+		 int timeslot=20;
+		 String selectedDate = "03/03/2014";
+		 System.out.println("Form values:"+datepick +"|"+visitTypeSelect+"|"+selectedSlot);
+		 if(datepick !=null){
+			 sessionMap.put("aptDateSelected", datepick);
+			 selectedDate = datepick;
+		 }else{
+			 selectedDate = (String) sessionMap.get("aptDateSelected");
+		 }
+		 if(visitTypeSelect !=null){
+			 sessionMap.put("visitTypeSelect", visitTypeSelect);
+			 timeslot = (visitTypeDAO.getVisitTypeById(Integer.parseInt(visitTypeSelect))).getVisitTime();
+			 sessionMap.put("timeslot", timeslot);
+		 }else{
+			 
+			 timeslot = Integer.parseInt((String)sessionMap.get("timeslot"));
+		 }
+		
+		 //03/04/2014
+		 //MM/dd/yyyy
+		System.out.println("selectedDate:"+selectedDate);
+		 String[] selectedDateArr = selectedDate.split("/");
+		 Calendar cal = new GregorianCalendar(Integer.parseInt(selectedDateArr[2]),
+				 					(Integer.parseInt(selectedDateArr[0]) -1),
+				 						Integer.parseInt(selectedDateArr[1])
+				 							
+				 							);
+		
 		 int noDocForDay = 0, noRoomForDay=0;
 		 //Step 1: Get the available doctors
 		 List<Doctor> doctorList = doctorDAO.getAvailableDoctors(selectedDate);
@@ -153,9 +237,12 @@ public class AppointmentAction extends ActionSupport
 		 List<Appointment> appointments = appointmentDAO.getAppointmentsForTimeSlot(new Date(cal.getTimeInMillis()));
 		 System.out.println(appointments.size());
 		 //List<AvailableTimeSlotGrid> availableList = new ArrayList<AvailableTimeSlotGrid>();
-		 manipulateTheGrid(doctorList,roomList,appointments,availableList,timeslot);
+		 manipulateTheGrid(doctorList,roomList,appointments,availableTmSlotList,timeslot);
+		 //Set Form fields
+		 visitTypeList = visitTypeDAO.getVisitTypes();
+		 showApointments = true;
 		 //Step 4: Fetch the remaining time slots
-		 printToConsole(availableList);
+		 printToConsole(availableTmSlotList);
 		 return "success";
 	 }
 	 
@@ -184,7 +271,8 @@ public class AppointmentAction extends ActionSupport
 			//Create the currentGrid Object
 			for(int i=0;i< count;++i){
 				currentGrid = new AvailableTimeSlotGrid(availableDocs,availableRooms,maxSlotsAvailable);
-				currentGrid.setTimeSlot(""+(clinicStartTime +(i /(60/timeslot)))+":"+((i % (60/timeslot))*timeslot));
+				currentGrid.setTimeSlot(""+(clinicStartTime +(i /(60/timeslot)))
+						+":"+((((i % (60/timeslot))*timeslot) > 0)? ((i % (60/timeslot))*timeslot):"00"));
 				System.out.println("Time Set to:"+(clinicStartTime +(i /(60/timeslot)))+":"+((i % (60/timeslot))*timeslot));
 				availableList.add(currentGrid);
 			}
@@ -341,6 +429,30 @@ public class AppointmentAction extends ActionSupport
 
 	public void setAppointmentList(List<Appointment> appointmentList) {
 		this.appointmentList = appointmentList;
+	}
+
+	public List<VisitType> getVisitTypeList() {
+		return visitTypeList;
+	}
+
+	public void setVisitTypeList(List<VisitType> visitTypeList) {
+		this.visitTypeList = visitTypeList;
+	}
+
+	public List<AvailableTimeSlotGrid> getAvailableList() {
+		return availableTmSlotList;
+	}
+
+	public void setAvailableList(List<AvailableTimeSlotGrid> availableList) {
+		this.availableTmSlotList = availableList;
+	}
+
+	public String getDatepick() {
+		return datepick;
+	}
+
+	public void setDatepick(String datepick) {
+		this.datepick = datepick;
 	}
 	
 }

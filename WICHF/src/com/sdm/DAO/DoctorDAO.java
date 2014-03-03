@@ -14,6 +14,7 @@ import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
 import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
 import com.sdm.model.Appointment;
 import com.sdm.model.Doctor;
+import com.sdm.model.VisitType;
 import com.sdm.util.HibernateUtil;
 
 public class DoctorDAO {
@@ -40,6 +41,33 @@ public class DoctorDAO {
 		transaction.commit();
 	   }
 
+	public Doctor getDoctorById(int doctorId)	
+	   {
+
+		Doctor doctor = null;
+		try{
+		initializeTransaction();
+		doctor =  (Doctor) session.get(Doctor.class, doctorId);
+	      transaction.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	      return doctor;
+	   }
+	public void initializeTransaction()
+	{
+		try{
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			transaction = session.beginTransaction();
+		}
+		catch(Exception e){
+			if (transaction!=null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+	}
 	public List<Doctor> getAvailableDoctors(String selectedDate) {
 	
 		List<Doctor> doctorList = new ArrayList<Doctor>();

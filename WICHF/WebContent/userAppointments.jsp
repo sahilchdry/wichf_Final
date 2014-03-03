@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 		
-		<s:iterator value="appointmentList">
+		<s:iterator value="availableTmSlotList">
 			<td>    
 		        <s:property value="appointmentId"/><br>
 		    </td>

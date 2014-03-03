@@ -15,14 +15,14 @@
           
           
           <td  width="19"><img src="images/appointment.png" height = "50" width = "50"></td>
-          <td width="100%"><a href="calendar.jsp">Book Appointment</a></td>
+          <td width="100%"><a href="bookAppointment">Book Appointment</a></td>
         </tr>
         
         <tr> 
           
           
           <td  width="19"><img src="images/history.png" height = "50" width = "50"></td>
-          <td width="100%"><a href="/getAppointments">View History</a></td>
+          <td width="100%"><a href="getAppointments">View History</a></td>
         </tr>
         
         
