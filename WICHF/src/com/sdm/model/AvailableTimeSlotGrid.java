@@ -11,11 +11,14 @@ public class AvailableTimeSlotGrid {
 	
 	private int count;
 	
+	private String slotValue;
+	
 	public AvailableTimeSlotGrid( String availableDocs, String availableRooms, int maxSlotsAvailable){
 		this.availableDoctorIds = availableDocs;
 		this.availableRoomIds = availableRooms;
 		this.count = maxSlotsAvailable;
 		timeSlot="";
+		slotValue =timeSlot +"|"+availableDoctorIds+"|"+availableRoomIds+"|"+count;
 	}
 
 	
@@ -50,6 +53,18 @@ public class AvailableTimeSlotGrid {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+
+	public String getSlotValue() {
+		slotValue =timeSlot +"_"+availableDoctorIds+"_"+availableRoomIds+"_"+count;
+		return slotValue;
+	}
+
+
+	public void setSlotValue(String slotValue) {
+		this.slotValue = slotValue;
+	}
+
 	
 	
 }

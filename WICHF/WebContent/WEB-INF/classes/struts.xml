@@ -37,9 +37,9 @@
          <result name="failure"> /FailedRegistration.jsp </result>
       </action>
       
-      <action name="appointment" method="makeAppointment"
+      <action name="saveAppointment" method="makeAppointment"
          class="com.sdm.controller.AppointmentAction">
-         <result name="success"> /appointment.jsp </result>
+         <result name="success"> /userCart.jsp </result>
 <!--          <result name="displayAppointments">/userAppointments.jsp</result> -->
       </action>
       
@@ -49,12 +49,23 @@
          <result name="failure"> /home.jsp </result>
       </action>
       
-      <action name="getAppointments" method="getAppointmentsForUser"
+<!--       <action name="getAppointments" method="getAppointmentsForUser" -->
+<!--          class="com.sdm.controller.AppointmentAction"> -->
+<!--          <result name="displayAppointments">/userAppointments.jsp</result> -->
+<!--       </action> -->
+      
+      <action name="bookAppointment" method="bookAppointment"
          class="com.sdm.controller.AppointmentAction">
-         <result name="displayAppointments">/userAppointments.jsp</result>
+         <result name="success">/calendar.jsp</result>
       </action>
       
- 	<action name="updateappointment" method="updateAppointment"
+      <action name="getAppointments" method="getAvailableTimeslots"
+         class="com.sdm.controller.AppointmentAction">
+         <result name="success">/calendar.jsp</result>
+         <result name="input">/calendar.jsp</result>
+      </action>
+      
+ 	<action name="updateappointment" method="getAvailableTimeslots"
          class="com.sdm.controller.AppointmentAction">
          <result name="success"> /updateAppointment.jsp </result>
          <result name="failure"> /home.jsp </result>
