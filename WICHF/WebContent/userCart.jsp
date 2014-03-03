@@ -7,9 +7,12 @@
 <head>
 <script type="text/javascript">
 	
-	function cancelAction()
+	function payAction()
 	{	
-	document.location.href("payment.jsp"); 
+		var elem = document.getElementById("addCartValue");
+		elem.value = "pay"; 
+		
+		//document.getElementById("placeholder2").submit();
 	}
 </script>
 <title>User Cart</title>
@@ -18,7 +21,8 @@
 <body>
 <center><h2>User Cart</h2></center>
 
- 	<form id="placeholder" method="post" action="saveSessionAppointments">
+ 	<form id="placeholder2" method="post" action="saveSessionAppointments">
+ 	<input type="hidden" name="addCartValue" id="addCartValue" value="save_apt">
 	<TABLE align="center" border="2">
 	
 		<TR>
@@ -47,7 +51,12 @@
 		  </td>
 		  
 		  
-		  <td><a href="" onclick="javascript:cancelAction();"><input type="button" value="Pay" name="pay"></a></td>
+		  <td>
+ 		  <input type="submit"  value="Pay"  onclick="javascript:payAction();"> 
+		  
+<!--  		  <a href="" onclick="javascript:payAction();"><input type="button" value="Pay" name="pay"></a>  -->
+		  
+		  </td>
 	  </tr>
 	  
 </TABLE>

@@ -76,7 +76,8 @@ public class AppointmentDAO {
 //			c.getExecutableCriteria(session).;
 			// System.out.println("Appointment Room Id:"+appointment.getRoom().getRoomId());
 			 try{
-				session.save(appointment);
+				 session.save(appointment);
+				// System.out.println("Saved with id:"+appointment.getAppointmentId());
 				transaction.commit();
 			 }catch(Exception e){
 				 e.printStackTrace();

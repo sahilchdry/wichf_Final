@@ -1,5 +1,6 @@
 package com.sdm.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,8 @@ public class PaymentAction extends ActionSupport
 	 */
 	private static final long serialVersionUID = 1L;
 	private Payment payment = new Payment();
+	AppointmentAction aptAction = new AppointmentAction(); 
+			
 	private SessionMap<String,Object> sessionMap;
 	PaymentDAO paymentDAO = new PaymentDAO();
 
@@ -37,15 +40,32 @@ public class PaymentAction extends ActionSupport
 	
 	public String doPayment(){
 		String result = "failure";
+		Appointment appointment = null;
 		HttpSession session=ServletActionContext.getRequest().getSession(false);  
 		// if(session==null || session.getAttribute("userId")==null){  
 		try{
-			Appointment appointment = new Appointment();
-			appointment.setAppointmentId(1);
-			payment.setAppointment(appointment);
-			payment.setCardNumber("1234");
-			payment.setCardHolderName("Test");
+			//aptAction.saveSessionAppointments();
+//			
+//			List<Appointment> tempAppointmentList = (List<Appointment>) sessionMap.get("toSaveAptList");
+//			
+//			if(tempAppointmentList != null){
+//				appointment = tempAppointmentList.get(0);
+//			}
+			System.out.println(" Payment:"+payment.getCardHolderName() +" & "+payment.getCardNumber());
+			
+			//Appointment appointment = new Appointment();
+			//appointment.setAppointmentId(1);
+			if(sessionMap.get("savedAptId") != null){
+				Appointment apt = (Appointment)sessionMap.get("savedAptId") ;
+				System.out.println("Payment for appointment :"+apt.getAppointmentId());
+				payment.setAppointment(apt);
+			}else{
+				appointment = new Appointment();
+				appointment.setAppointmentId(1);
+			}
+		
 			paymentDAO.savePayment(payment);
+			result = "success";
 		}catch(Exception exception){
 			//DO Nothing
 		}

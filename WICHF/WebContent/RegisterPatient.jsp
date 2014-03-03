@@ -115,11 +115,11 @@
   </TR>
   <TR>
     <TD>Password</TD>
-    <TD><INPUT TYPE="TEXT" NAME="user.password" value=" " SIZE="20"></TD>
+    <TD><INPUT TYPE="password" NAME="user.password" value=" " SIZE="20"></TD>
   </TR>
   <TR>
     <TD>Re Enter Password</TD>
-    <TD><INPUT TYPE="TEXT" NAME="Spassword" value=" " SIZE="20"></TD>
+    <TD><INPUT TYPE="password" NAME="Spassword" value=" " SIZE="20"></TD>
   </TR>
   
 </TABLE>

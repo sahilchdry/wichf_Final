@@ -74,6 +74,8 @@
 				<li><a href="/WICHF/logout">Logout</a></li>
 				
 				<li><a href="updateAccount.jsp">Update Account</a></li>
+				
+				<li><a href="patientmenu.jsp">My Account</a></li>
 		  
 		  <%}else{%>
 			    <li><a href="login.jsp">Login</a></li>

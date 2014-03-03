@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Payment {
 
 	@Id
-	@Column(name="payment_id")
+	@Column(name="	")
 	private int paymentId;
 	
 	@Column(name="card_num")

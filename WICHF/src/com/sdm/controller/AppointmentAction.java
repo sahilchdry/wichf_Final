@@ -42,7 +42,11 @@ public class AppointmentAction extends ActionSupport
 	private Payment payment = new Payment();
 	private SessionMap<String,Object> sessionMap;
 	public boolean showApointments = false;
+	public String addCartValue;
+	
+
 	public String datepick,visitTypeSelect,selectedSlot;
+	public String user_Id;
 	
 	private VisitType visitType = new VisitType();
 	public List<Appointment> tempAppointmentList = new ArrayList<Appointment>();
@@ -61,6 +65,11 @@ public class AppointmentAction extends ActionSupport
 	
 	 public String addToCart()
 	   {
+		 String accessLevel = (String) sessionMap.get("accessLevel");
+		 System.out.println("accessLevel"+accessLevel);
+		 if(!(accessLevel.equals("patient"))){
+			 user.setUserId((String) sessionMap.get("userIdForNurseReg"));
+		 }
 		 System.out.println("Finally:"+selectedSlot);
 		 System.out.println("*********");
 		 //appointment.setAppointmentId();
@@ -107,7 +116,7 @@ public class AppointmentAction extends ActionSupport
 		 }
 		 appointment.setVisitType(visitTypeDAO.getVisitTypeById(visitType.getVisitTypeId())); //need to put visit type id object
 		 
-		 if( sessionMap.get("userId") != null){
+		 if( sessionMap.get("userId") != null && accessLevel.equals("patient")){
 			 user.setUserId((String)sessionMap.get("userId"));
 		 }else{
 			 //User has not logged in
@@ -215,11 +224,13 @@ public class AppointmentAction extends ActionSupport
 			 tempAppointmentList.clear();
 			 if(sessionMap.get("toSaveAptList") != null){
 				 tempAppointmentList = (List<Appointment>) sessionMap.get("toSaveAptList");
-				 
-
 				 for(Appointment appointment : tempAppointmentList){
-					 appointmentDAO.saveAppointment(appointment);
+					 appointment =  appointmentDAO.saveAppointment(appointment);
 				 }
+				 List<Appointment> apts = appointmentDAO.getAppointments(userId);
+				 //System.out.println("Appointment is saved with id:"+(apts.get(apts.size() -1)));
+				 sessionMap.put("savedAptId",1);
+			 
 			 }
 			 //Get the user earlier booked history
 			 if( sessionMap.get("userId") != null){
@@ -230,7 +241,12 @@ public class AppointmentAction extends ActionSupport
 			 //Removing after the appointments are saved.
 			 if(sessionMap.get("toSaveAptList") != null)
 				 sessionMap.remove("toSaveAptList");
-			 redirection = "success";
+			 System.out.println("addCartValue"+addCartValue);
+			 if(addCartValue.equalsIgnoreCase("pay")){
+				 redirection = "forwardPayment";
+			 }else{
+				 redirection = "success";
+			 }
 		 }else{
 			 //redirection = "loginRequired";
 		 }
@@ -239,6 +255,7 @@ public class AppointmentAction extends ActionSupport
 	 
 	 public String getAvailableTimeslots()
 	 {
+		 sessionMap.put("userIdForNurseReg", user_Id);
 		 int timeslot=20;
 		 String selectedDate = "03/03/2014";
 		 System.out.println("Form values:"+datepick +"|"+visitTypeSelect+"|"+selectedSlot);
@@ -508,5 +525,13 @@ public class AppointmentAction extends ActionSupport
 	public void setAppointmentHistory(List<Appointment> appointmentHistory) {
 		this.appointmentHistory = appointmentHistory;
 	}
-	
+
+	public String getAddCartValue() {
+		return addCartValue;
+	}
+
+	public void setAddCartValue(String addCartValue) {
+		this.addCartValue = addCartValue;
+	}
 }
+

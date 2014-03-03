@@ -24,7 +24,7 @@
   </TR>
   <tr>
   <td><input type="submit" value="Login" id="login">  </td>
-  <td><input type="button" value="Cancel" id="cancel"></td>
+ <td><input type="button" onclick="location.href('home.jsp');" value="Cancel" id="cancel"></td>
   
   
   
