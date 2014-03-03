@@ -101,39 +101,6 @@ public class AppointmentDAO {
 			return result;
 		   }
 		
-//		public int updateAppointment(Appointment appointment, 
-//				Date appointmentDate, int appointmentId, int timeSlot, int doctorId)
-//		   {
-//			initializeTransaction();
-//			String hql;
-//			int result=0;
-//			hql = "UPDATE APPOINTMENT SET time_slot = :timeSlot, " +
-//					",appointment_date = :appointmentDate" +
-//					",booked_date = :currentDate" +
-//					" , doctor_id = :doctorId" +
-//					" , room_id = :roomId" +
-//					"WHERE appointment_id = :appointmentId";
-//			try{
-//				Query query = session.createQuery(hql);
-//				
-//				query.setParameter(":timeSlot", 60);
-//				query.setParameter(":appointmentDate",appointmentDate);
-//				query.setParameter(":currentDate",(new java.util.Date()).toString());
-//				query.setParameter(":doctorId", doctorId);
-//				query.setParameter(":roomId", 5);
-//		    	query.setParameter(":appointmentId", appointmentId);
-//		    
-//		    	result = query.executeUpdate();
-//				
-//			}catch(Exception e)
-//			{
-//				e.printStackTrace();
-//			}
-//			
-//			session.save(appointment);
-//			return result;
-//		   }
-		
 		public void updateAppointment(Appointment appointment){
 			initializeTransaction();
 			session.merge(appointment);
@@ -163,6 +130,27 @@ public class AppointmentDAO {
 		    	  
 		    	  //appointmentList = (List<Appointment>) session.createQuery("from Appointment where user_id =").setParameter("", arg1)
 		    	  transaction.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			return appointmentList;
+		}
+		public List<Appointment> getAppointmentsForTimeSlot(java.util.Date date) {
+			//List obj
+			//Get all active appointments
+			List<Appointment> appointmentList = new ArrayList<Appointment>();
+			initializeTransaction();
+			String hql;
+			hql = "FROM Appointment WHERE active = :active and appointmentDate = :aptDate";
+			try
+			{
+				Query query = session.createQuery(hql);
+				query.setParameter("active", 0);
+		    	query.setParameter("aptDate", date);
+		    	appointmentList = (query.list()!=null)?(List<Appointment>) query.list() :null;
+		    	transaction.commit();
 			}
 			catch(Exception e)
 			{

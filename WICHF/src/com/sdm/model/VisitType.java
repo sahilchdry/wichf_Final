@@ -15,6 +15,9 @@ public class VisitType {
 	@Column(name="visit_type")
 	private String visitType;
 
+	@Column(name="visit_time")
+	private int visitTime;
+
 	public String getVisitType() {
 		return visitType;
 	}
@@ -29,6 +32,14 @@ public class VisitType {
 
 	public void setVisitTypeId(int visitTypeId) {
 		this.visitTypeId = visitTypeId;
+	}
+
+	public int getVisitTime() {
+		return visitTime;
+	}
+
+	public void setVisitTime(int visitTime) {
+		this.visitTime = visitTime;
 	}
 
 	

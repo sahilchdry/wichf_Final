@@ -1,6 +1,8 @@
 package com.sdm.model;
 
 import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 import javax.persistence.Column;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="appointment")
@@ -50,7 +54,10 @@ public class Appointment {
 	private Appointment parentAppointmentId;
 	
 	@Column(name="start_time")
-	private Date startTime;
+	private String startTimeStr;
+	
+	@Transient
+	private java.util.Date startTime;
 	
 	@ManyToOne(targetEntity = VisitType.class)
     @JoinColumn(name="visit_type_id", referencedColumnName="visit_type_id")
@@ -96,16 +103,16 @@ public class Appointment {
 		this.visitType = visitType;
 	}
 
+	public Date getBookedDate() {
+		return bookedDate;
+	}
+
 	public int getActive() {
 		return active;
 	}
 
 	public void setActive(int active) {
 		this.active = active;
-	}
-
-	public Date getBookedDate() {
-		return bookedDate;
 	}
 
 	public void setBookedDate(Date bookedDate) {
@@ -146,12 +153,30 @@ public class Appointment {
 		this.parentAppointmentId = parentAppointmentId;
 	}
 
-	public Date getStartTime() {
+	public java.util.Date getStartTime() {
+		Calendar cal = new GregorianCalendar(Integer.parseInt(startTimeStr.substring(0, 4)),
+				 Integer.parseInt(startTimeStr.substring(5, 7)),
+				 Integer.parseInt(startTimeStr.substring(8, 10)),
+				 Integer.parseInt(startTimeStr.substring(11, 13)),
+				 Integer.parseInt(startTimeStr.substring(14, 16)),
+				 Integer.parseInt(startTimeStr.substring(17, 19)));
+		this.startTime = cal.getTime();
 		return startTime;
 	}
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+	}
+
+	public String getStartTimeStr() {
+		System.out.println(startTimeStr);
+
+		return startTimeStr;
+	}
+
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
+
 	}
 	
 	

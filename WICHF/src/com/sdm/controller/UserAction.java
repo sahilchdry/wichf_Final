@@ -52,7 +52,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User>, Sess
 		if (loggedUser.getPassword().equals(user.getPassword())) {
 			sessionMap.put("userId", loggedUser.getUserId());
 			sessionMap.put("accessLevel", loggedUser.getAccessLevel());
-			
 			result = "success";
 		}
 		return result;

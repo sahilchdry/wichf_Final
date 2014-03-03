@@ -23,7 +23,7 @@ public class Payment {
 	private String typeOfCard;
 	
 	
-	@Column(name="car_holder_name")
+	@Column(name="card_holder_name")
 	private String cardHolderName;
 	
 	@Column(name="expiry_date")

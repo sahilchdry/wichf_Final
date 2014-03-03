@@ -1,5 +1,11 @@
 package com.sdm.DAO;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -53,6 +59,50 @@ public class RoomDAO {
 	      transaction.commit();
 	      return room;
 	   }
+	public List<Room> getAvailableRooms(String selectedDate) {
+
+		List<Room> roomList = new ArrayList<Room>();
+		String hql;
+		hql = "FROM Room " +
+				" WHERE roomId NOT IN ("+
+				" SELECT room.roomId FROM RoomNonAvailability " +
+				" WHERE room_non_availablity_date = :dateToCheck " +
+				" )" 
+				//+" AND status= :status"
+				;
+		try{
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			transaction = session.beginTransaction();
+			
+			Query query = session.createQuery(hql);
+			query.setParameter("dateToCheck", selectedDate);
+			//query.setParameter(":status", "Active");
+	    	roomList = (query.list()!=null)?(List<Room>) query.list() :null;
+			
+		}
+		catch(Exception e){
+			if (transaction!=null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		transaction.commit();
+		return roomList;
+	}
+	
+	private Date getStringToDate(String strDate){
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+	    Date startDate = new Date(0, 0, 0);
+	    try {
+	        startDate = (Date) df.parse(strDate);
+	       // String newDateString = df.format(startDate);
+	       // System.out.println(newDateString);
+	    } catch (Exception e) {
+	    	System.out.println("Error ocured for date:"+strDate);
+	        e.printStackTrace();
+	    }
+	    return startDate;
+	}
 	
 	
 }
