@@ -14,7 +14,7 @@
 	<table border="3" align="center">
 	
 		<tr> 
-		<th> Appointment Id </th>
+		
 		<th> Appointment Date & Time</th>
 		<th> Visit Type </th>
 		<th> Doctor Name</th>
@@ -23,7 +23,6 @@
 	
 		<tr> 
 		<s:iterator value="tempAppointmentList">
-			<td><s:property value="appointmentId"/><br></td>
 			<td><s:property value="startTimeStr"/><br></td>
 			<td><s:property value="visitType.visitType"/><br></td>
 			<td><s:property value="doctor.doctorName"/><br></td>

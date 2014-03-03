@@ -42,6 +42,9 @@ public class AppointmentAction extends ActionSupport
 	private Payment payment = new Payment();
 	private SessionMap<String,Object> sessionMap;
 	public boolean showApointments = false;
+	public String addCartValue;
+	
+
 	public String datepick,visitTypeSelect,selectedSlot;
 	
 	private VisitType visitType = new VisitType();
@@ -215,11 +218,13 @@ public class AppointmentAction extends ActionSupport
 			 tempAppointmentList.clear();
 			 if(sessionMap.get("toSaveAptList") != null){
 				 tempAppointmentList = (List<Appointment>) sessionMap.get("toSaveAptList");
-				 
-
 				 for(Appointment appointment : tempAppointmentList){
-					 appointmentDAO.saveAppointment(appointment);
+					 appointment =  appointmentDAO.saveAppointment(appointment);
 				 }
+				 List<Appointment> apts = appointmentDAO.getAppointments(userId);
+				 //System.out.println("Appointment is saved with id:"+(apts.get(apts.size() -1)));
+				 sessionMap.put("savedAptId",1);
+			 
 			 }
 			 //Get the user earlier booked history
 			 if( sessionMap.get("userId") != null){
@@ -230,7 +235,12 @@ public class AppointmentAction extends ActionSupport
 			 //Removing after the appointments are saved.
 			 if(sessionMap.get("toSaveAptList") != null)
 				 sessionMap.remove("toSaveAptList");
-			 redirection = "success";
+			 System.out.println("addCartValue"+addCartValue);
+			 if(addCartValue.equalsIgnoreCase("pay")){
+				 redirection = "forwardPayment";
+			 }else{
+				 redirection = "success";
+			 }
 		 }else{
 			 //redirection = "loginRequired";
 		 }
@@ -508,5 +518,13 @@ public class AppointmentAction extends ActionSupport
 	public void setAppointmentHistory(List<Appointment> appointmentHistory) {
 		this.appointmentHistory = appointmentHistory;
 	}
-	
+
+	public String getAddCartValue() {
+		return addCartValue;
+	}
+
+	public void setAddCartValue(String addCartValue) {
+		this.addCartValue = addCartValue;
+	}
 }
+

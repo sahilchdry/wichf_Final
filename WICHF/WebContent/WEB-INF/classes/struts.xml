@@ -46,6 +46,8 @@
       <action name="saveSessionAppointments" method="saveSessionAppointments"
          class="com.sdm.controller.AppointmentAction">
          <result name="success"> /viewhistory.jsp </result>
+         <result name="forwardPayment"> /payment.jsp </result>
+         
 <!--          <result name="loginRequired">/WICHF/login</result> -->
 <!--          <result name="displayAppointments">/userAppointments.jsp</result> -->
       </action>
