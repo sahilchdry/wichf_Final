@@ -9,13 +9,36 @@
 </head>
 <body>
 <center><h2>Nurse Registration</h2></center>
-	<form action="addNurse">
-			 
-			 Nurse Name:  <input type="text" name="nurseName" value=""/>
-			 Nurse Status: <input type="text" name="status" value="Active"/>
-			  
-     	      <input type="text" name="user.userId" value="User Id"/>
-		      <input type="password" name="user.password" value="Password"/>
-		      <input type="submit" value="Add Nurse"/>
+	
+	<form action="addNurse" method="post">
+		
+<TABLE align="center">
+  
+  <TR>
+    <TD> Nurse Name:</TD>
+    <TD><INPUT TYPE="TEXT" NAME="nurseName" value=" " SIZE="20"></TD>
+  </TR>
+  
+  
+  <TR>
+    <TD>Nurse Status:</TD>
+    <TD><INPUT TYPE="TEXT" NAME="status" value="Active" SIZE="20"></TD>
+  </TR>
+  
+  
+  <TR>
+    <TD>User Id:</TD>
+    <TD><INPUT TYPE="TEXT" NAME="user.userId" value="User Id" SIZE="20"></TD>
+  </TR>
+  
+  
+  <TR>
+    <TD>Password</TD>
+    <TD><INPUT TYPE="TEXT" NAME="user.password" value="Password" SIZE="20"></TD>
+  </TR>
+  
+</TABLE>
+		    <INPUT align="middle" TYPE="SUBMIT" VALUE="Add nurse" NAME="B1">
+		
 		   </form>
    		<%@ include file="footer.jsp" %>

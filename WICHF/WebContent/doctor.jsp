@@ -10,13 +10,36 @@
 <body>
 <center><h2>Doctor Registration</h2></center>
 	<form action="addDoctor">
-			 
-			 Doctor Name:  <input type="text" name="doctorName" value=""/>
-			 Doctor Status: <input type="text" name="status" value="Active"/>
-			  
-     	      <input type="text" name="user.userId" value="User Id"/>
-		      <input type="password" name="user.password" value="Password"/>
-		      <input type="submit" value="Add Doctor"/>
+		   
+		
+<TABLE align="center">
+  
+  <TR>
+    <TD> Doctor Name:</TD>
+    <TD><INPUT TYPE="TEXT" NAME="doctorName" value=" " SIZE="20"></TD>
+  </TR>
+  
+  
+  <TR>
+    <TD>Doctor Status:</TD>
+    <TD><INPUT TYPE="TEXT" NAME="status" value="Active" SIZE="20"></TD>
+  </TR>
+  
+  
+  <TR>
+    <TD>User Id:</TD>
+    <TD><INPUT TYPE="TEXT" NAME="user.userId" value="User Id" SIZE="20"></TD>
+  </TR>
+  
+  
+  <TR>
+    <TD>Password</TD>
+    <TD><INPUT TYPE="TEXT" NAME="user.password" value="Password" SIZE="20"></TD>
+  </TR>
+  
+</TABLE>
+		    <INPUT align="middle" TYPE="SUBMIT" VALUE="Add Doctor" NAME="B1">
+		
 		   </form>
    		
 <%@ include file="footer.jsp" %>
