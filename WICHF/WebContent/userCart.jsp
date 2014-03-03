@@ -5,13 +5,14 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
+
 <title>User Cart</title>
 
 </head>
 <body>
 <center><h2>User Cart</h2></center>
 
- 	<form id="placeholder" method="post" action="">
+ 	<form id="placeholder" method="post" action="saveSessionAppointments">
 	<TABLE align="center" border="2">
 	
 		<TR>
@@ -29,8 +30,6 @@
 		 				</tr>
 					</s:iterator>
 		    	
-		  	
-
 		  <tr>
 		  	
 	  		
@@ -38,11 +37,13 @@
 	  
 	  <tr>
 	  	<td>
-		  <INPUT TYPE="SUBMIT" VALUE="Save" NAME="B1">
+	  	<input type="button" onclick="location.href('/WICHF/saveSessionAppointments');" value="Save Appointment">
+		 
 		  
 		  </td>
 		  <td>
-		  <INPUT TYPE="SUBMIT" VALUE="Confirm" NAME="B1">
+		  <input type="button" onclick="location.href('/WICHF/payment.jsp');" value="Confirm & Pay">
+		  
 		  
 		  </td>
 	  </tr>
