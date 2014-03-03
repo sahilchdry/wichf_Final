@@ -8,10 +8,10 @@
 <script type="text/javascript">
 	
 	function payAction()
-	{	alert();
+	{	
 		var elem = document.getElementById("addCartValue");
 		elem.value = "pay"; 
-		alert(document.getElementById("addCartValue").value);
+		
 		//document.getElementById("placeholder2").submit();
 	}
 </script>

@@ -49,10 +49,7 @@
 	<form action="updateAccount" 	method="post" onsubmit="return validateForm(this);" >
 <TABLE align="center">
   
-  <TR>
-    <TD>Health Card Number</TD>
-    <TD><INPUT TYPE="TEXT" NAME="healthCardNumber" value=" " SIZE="20"></TD>
-  </TR>
+ 
   
   
   <TR>
@@ -60,10 +57,7 @@
     <TD><INPUT TYPE="TEXT" NAME="phoneNumber" value=" " SIZE="20"></TD>
   </TR>
   
-  <TR>
-    <TD>UserId</TD>
-    <TD><INPUT TYPE="TEXT" NAME="user.userId" value=" " SIZE="20"></TD>
-  </TR>
+  
   
     <INPUT align="middle" TYPE="SUBMIT" VALUE="Update Information" NAME="B1">
   </td>
